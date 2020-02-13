@@ -15,19 +15,20 @@
             <div class="col">
                 <h2>Fares & Passes</h2>
                 <p>Choose an option that fits your needs - from a single day ride to 31 day service pass.</p>
-                <button>Find Fare Information</button>
+                <a asp-area="" asp-controller="Home" asp-action="Fares" 
+                   class="btn-outline-primary btn-lg" role="button">Find Fare Information</a>
             </div>
             <div class="col">
                 <h2>Service Alerts</h2>
                 <p>Check for detours, delays, and closures.</p>
-                <button>Find Service Alerts</button>
+                <a asp-area="" asp-controller="Home" asp-action="Alerts">Find Service Alerts</a>
             </div>
         </div>
         <br /><br />
         <div class="row">
             <div class="col align-items-end align-self-end">
                 <h1>Buy your passes online now!</h1>
-                <button>Buy online</button>
+                <a asp-area="" asp-controller="Home" asp-action="Purchase">Buy online</a>
             </div>
         </div>
     </div>
