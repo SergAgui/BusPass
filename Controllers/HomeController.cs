@@ -33,6 +33,21 @@ namespace BusPass.Controllers
             return View();
         }
 
+        public IActionResult Alerts()
+        {
+            return View();
+        }
+
+        public IActionResult Fares()
+        {
+            return View();
+        }
+
+        public IActionResult Purchase()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
