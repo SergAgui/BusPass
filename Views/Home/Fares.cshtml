@@ -1,8 +1,8 @@
 ﻿
 @{
-    ViewData["Title"] = "Fares";
+    ViewData["Title"] = "Fares and Passes";
 }
-<!--Full descriptions-->
+
 <h1>Fares and Passes</h1>
 <br />
 <br />
@@ -12,10 +12,21 @@
     <li>Children below the age of 10 must be accompanied by someone 12 or older</li>
 </ul>
 <h3>Single Ride Service</h3>
-<table>
-    <tr><th>Single Ride Fare</th></tr>
-    <tr>Use Flexbox here instead</tr>
-</table>
+<div class="d-flex flex-column">
+    <div class="d-flex flex-row">
+        <div class="p-2">Single Ride Fare</div>
+        <div class="p-2">$1.25</div>
+    </div>
+    <div class="d-flex flex-row">
+        <div class="p-2">Single Reduced Fare</div>
+        <div class="p-2">$0.60</div>
+    </div>
+    <div class="d-flex flex-row">
+        <div class="p-2">Disability Access</div>
+        <div class="p-2">$1.75</div>
+    </div>
+</div>
+
 <h3>Day Pass</h3>
 <ul>
     <li></li>
