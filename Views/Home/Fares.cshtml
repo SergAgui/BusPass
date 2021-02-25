@@ -5,63 +5,134 @@
 <h1>Fares and Passes</h1>
 <br />
 <br />
-<h3>Kids ride free!</h3>
-<ul>
-    <li>K-12 studends with valid ID</li>
-    <li>Children below the age of 10 must be accompanied by someone 12 or older</li>
-</ul>
-<h3>Military Personnel</h3>
-<p>Military personnel in uniform ride free! Acitve-duty military personnel not in uniform qualify for reduced fares with valid military ID.</p>
-
-<h3>Single Ride Service</h3>
-<div class="row">
-    <table class="table table-bordered table-hover col">
-        <tr>
-            <td>Single Ride Fare</td>
-            <td>$1.25</td>
-        </tr>
-        <tr>
-            <td>Single Reduced Fare</td>
-            <td>$0.60</td>
-        </tr>
-        <tr>
-            <td>Disability Access</td>
-            <td>$1.75</td>
-        </tr>
-    </table>
-    <div class="col"></div>
+<div id="accordion">
+    <div class="card">
+        <div class="card-header bg-info" id="headingOne">
+            <h3 class="mb-0">
+                <button class="btn btn-info" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                        aria-controls="collapseOne">
+                    Kids ride free!
+                </button>
+            </h3>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+                <ul>
+                    <li>K-12 studends with valid ID</li>
+                    <li>Children below the age of 10 must be accompanied by someone 12 or older</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header bg-info" id="headingTwo">
+            <h3 class="mb-0">
+                <button class="btn btn-info collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo">
+                    Military Personnel
+                </button>
+            </h3>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+                Military personnel in uniform ride free! Acitve-duty military personnel not in uniform qualify for reduced fares with valid military ID.
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header bg-info" id="headingThree">
+            <h3 class="mb-0">
+                <button class="btn btn-info collapsed" data-toggle="collapse" data-target="#collapseThree"
+                        aria-expanded="false" aria-controls="collapseThree">
+                    Single Ride Service
+                </button>
+            </h3>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-bordered table-hover col">
+                        <tr>
+                            <td>Single Ride Fare</td>
+                            <td>$1.25</td>
+                        </tr>
+                        <tr>
+                            <td>Single Reduced Fare</td>
+                            <td>$0.60</td>
+                        </tr>
+                        <tr>
+                            <td>Disability Access</td>
+                            <td>$1.75</td>
+                        </tr>
+                    </table>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header bg-info" id="headingFour">
+            <h3 class="mb-0">
+                <button class="btn btn-info collapsed" data-toggle="collapse" data-target="#collapseFour"
+                        aria-expanded="false" aria-controls="collapseFour">
+                    Day Passes
+                </button>
+            </h3>
+        </div>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-bordered table-hover col">
+                        <tr>
+                            <td>Single Day Fare</td>
+                            <td>$2.50</td>
+                        </tr>
+                        <tr>
+                            <td>Reduced Day Pass Fare</td>
+                            <td>$1.25</td>
+                        </tr>
+                        <tr>
+                            <td>Disability Day Access</td>
+                            <td>$3.00</td>
+                        </tr>
+                    </table>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header bg-info" id="headingFive">
+            <h3 class="mb-0">
+                <button class="btn btn-info collapsed" data-toggle="collapse" data-target="#collapseFive"
+                        aria-expanded="false" aria-controls="collapseFive">
+                    Disability Passes
+                </button>
+            </h3>
+        </div>
+        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-bordered table-hover col">
+                        <tr>
+                            <td>10 Ride Booklet</td>
+                            <td>$17.50</td>
+                        </tr>
+                        <tr>
+                            <td>Monthly Pass</td>
+                            <td>$46.50</td>
+                        </tr>
+                    </table>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<h3>Day Passes</h3>
 <div class="row">
-    <table class="table table-bordered table-hover col">
-        <tr>
-            <td>Single Day Fare</td>
-            <td>$2.50</td>
-        </tr>
-        <tr>
-            <td>Reduced Day Pass Fare</td>
-            <td>$1.25</td>
-        </tr>
-        <tr>
-            <td>Disability Day Access</td>
-            <td>$3.00</td>
-        </tr>
-    </table>
-    <div class="col"></div>
-</div>
-
-<h3>Disability Passes</h3>
-<div class="row">
-    <table class="table table-bordered table-hover col">
-        <tr>
-            <td>10 Ride Booklet</td>
-            <td>$17.50</td>
-        </tr>
-        <tr>
-            <td>Monthly Pass</td>
-            <td>$46.50</td>
-        </tr>
-    </table>
-    <div class="col"></div>
+    <div class="col w-100"></div>
+    <div class="col align-items-end">
+        <a asp-controller="Buying" asp-action="Order"
+           class="btn btn-primary btn-lg float-right">Order Here</a>
+    </div>
 </div>
