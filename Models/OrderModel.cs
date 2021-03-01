@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace BusPass.Models
 {
-    [Table("Admin")]
-    public class AdminModel
+    [Table("Orders")]
+    public class OrderModel
     {
         public int Id {get; set;}
-        public string FistName {get; set;}
-        public string LastName {get; set;}
+        public int CustomerId {get; set;}
+        public CustomerModel Customer {get; set;}
+        public FareModel Fare {get; set;}
+        public PriceModel Price {get; set;}
     }
 }
