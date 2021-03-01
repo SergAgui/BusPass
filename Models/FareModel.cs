@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BusPass.Models
 {
-    public class OrderModel
+    public class FareModel
     {
     }
 }
