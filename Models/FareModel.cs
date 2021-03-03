@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 namespace BusPass.Models
 {
     [Table("Fares")]
+    [Keyless]
     public class FareModel
     {
         public string SingleRide {get; set;}
