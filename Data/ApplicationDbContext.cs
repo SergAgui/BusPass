@@ -18,5 +18,6 @@ namespace BusPass.Data
         public DbSet<FareModel> Fares {get; set;}
         public DbSet<OrderModel> Orders {get; set;}
         public DbSet<PriceModel> Prices {get; set;}
+        public DbSet<ServiceAlertModel> ServiceAlerts {get; set;}
     }
 }

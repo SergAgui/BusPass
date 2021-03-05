@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,13 +10,8 @@ namespace BusPass.Models
     [Table("Fares")]
     public class FareModel
     {
-        public string SingleRide {get; set;}
-        public string SingleReduced {get; set;}
-        public string SingleDisability {get; set;}
-        public string SingleDay {get; set;}
-        public string ReducedDay {get; set;}
-        public string DisabilityDay {get; set;}
-        public string TenDayBooklet {get; set;}
-        public string MonthPass {get; set;}
+        public int Id {get; set;}
+        public string Fare {get; set;}
+        public PriceModel Price;
     }
 }

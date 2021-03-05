@@ -13,6 +13,5 @@ namespace BusPass.Models
         public int CustomerId {get; set;}
         public CustomerModel Customer {get; set;}
         public FareModel Fare {get; set;}
-        public PriceModel Price {get; set;}
     }
 }
