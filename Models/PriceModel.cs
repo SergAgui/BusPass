@@ -12,7 +12,7 @@ namespace BusPass.Models
     public class PriceModel
     {
         public int Id {get; set;}
-        [Required]
-        public int Price {get; set;}
+        [Required, DataType(DataType.Currency)]
+        public decimal Price {get; set;}
     }
 }
