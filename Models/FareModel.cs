@@ -14,11 +14,7 @@ namespace BusPass.Models
         public int Id {get; set;}
         [Required]
         public string Fare {get; set;}
-
         [Required]
         public PriceModel Price;
-
-        [DataType(DataType.Date)]
-        public DateTime PurchaseDate {get; set;}
     }
 }
