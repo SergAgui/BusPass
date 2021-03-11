@@ -48,6 +48,12 @@ namespace BusPass.Models
             var fare = _context.Fares.Where(fare => fare.Id == id).FirstOrDefault();
             return fare;
         }
+        public void UpdateFare(int id)
+        {
+            var fare = FindFareId(id);
+            _context.Update(fare);
+            _context.SaveChanges();
+        }
 
         //Customer Methods
         //Find Customer by Id 
@@ -55,13 +61,6 @@ namespace BusPass.Models
         {
             var customer = _context.Customers.Where(cust => cust.Id == id).FirstOrDefault();
             return customer;
-        }
-
-        public void UpdateFare(int id)
-        {
-            var fare = FindFareId(id);
-            _context.Update(fare);
-            _context.SaveChanges();
         }
 
         //Add new customers to db
