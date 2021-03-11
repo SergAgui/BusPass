@@ -37,7 +37,6 @@ namespace BusPass
                 options.UseSqlServer(
                     Configuration.GetConnectionString("BusPassDb")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
             services.AddControllersWithViews();
