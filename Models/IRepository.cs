@@ -11,10 +11,16 @@ namespace BusPass.Models
         void NewPrice(PriceModel price);
         void UpdatePrice(int id);
         void RemovePrice(int id);
+        
         FareModel FindFareId(int id);
         void NewFare(FareModel fare);
         void UpdateFare(int id);
         void RemoveFare(int id);
+
+        ServiceAlertModel FindAlertId(int id);
+        void NewAlert(ServiceAlertModel serviceAlert);
+        void RemoveAlert(int id);
+
         CustomerModel FindCustomerId(int id);
         void NewCustomer(CustomerModel customer);
         void RemoveCustomer(int id);

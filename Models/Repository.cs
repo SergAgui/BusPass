@@ -69,7 +69,24 @@ namespace BusPass.Models
 
         //Service Alert Methods
         //Find Alert by Id
-
+        public ServiceAlertModel FindAlertId(int id)
+        {
+            var serviceAlert = _context.ServiceAlerts.Where(sa => sa.Id == id).FirstOrDefault();
+            return serviceAlert;
+        }
+        //Add new Alert to db
+        public void NewAlert(ServiceAlertModel serviceAlert)
+        {
+            _context.ServiceAlerts.Add(serviceAlert);
+            _context.SaveChanges();
+        }
+        //Remove Alert from db
+        public void RemoveAlert(int id)
+        {
+            var serviceAlert = FindAlertId(id);
+            _context.ServiceAlerts.Remove(serviceAlert);
+            _context.SaveChanges();
+        }
 
         //Customer Methods
         //Find Customer by Id 
