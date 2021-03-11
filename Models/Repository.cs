@@ -26,6 +26,14 @@ namespace BusPass.Models
             _context.SaveChanges();
         }
 
+        //Update price
+        public void UpdatePrice(int id)
+        {
+            var price = FindPriceId(id);
+            _context.Update(price);
+            _context.SaveChanges();
+        }
+
         //Add new fare to db
         public void NewFare(FareModel fare)
         {
@@ -47,6 +55,13 @@ namespace BusPass.Models
         {
             var customer = _context.Customers.Where(cust => cust.Id == id).FirstOrDefault();
             return customer;
+        }
+
+        public void UpdateFare(int id)
+        {
+            var fare = FindFareId(id);
+            _context.Update(fare);
+            _context.SaveChanges();
         }
 
         //Add new customers to db
