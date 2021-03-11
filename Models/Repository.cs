@@ -115,5 +115,19 @@ namespace BusPass.Models
             _context.Customers.Update(customer);
             _context.SaveChanges();
         }
+
+        //Exceptions
+        public class IncorrectFareException : Exception
+        {
+            public IncorrectFareException(string message) : base(message)
+            {
+            }
+        }
+        public class IncorrectCustomerException : Exception
+        {
+            public IncorrectCustomerException(string message) : base(message)
+            {
+            }
+        }
     }
 }
