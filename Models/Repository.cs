@@ -66,6 +66,11 @@ namespace BusPass.Models
             _context.Fares.Remove(fare);
             _context.SaveChanges();
         }
+        //List of all Fares
+        public List<FareModel> AllFares()
+        {
+            return _context.Fares.ToList();
+        }
 
         //Service Alert Methods
         //Find Alert by Id
@@ -87,6 +92,11 @@ namespace BusPass.Models
             _context.ServiceAlerts.Remove(serviceAlert);
             _context.SaveChanges();
         }
+        //List of all Alerts
+        public List<ServiceAlertModel> AllAlerts()
+        {
+            return _context.ServiceAlerts.ToList();
+        }
 
         //Customer Methods
         //Find Customer by Id 
@@ -95,7 +105,7 @@ namespace BusPass.Models
             var customer = _context.Customers.Where(cust => cust.Id == id).FirstOrDefault();
             return customer;
         }
-        //Add new customers to db
+        //New customer to db
         public void NewCustomer(CustomerModel customer)
         {
             _context.Customers.Add(customer);

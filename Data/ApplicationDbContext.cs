@@ -14,7 +14,6 @@ namespace BusPass.Data
         {
         }
         public DbSet<CustomerModel> Customers {get; set;}
-        public DbSet<AdminModel> Admins {get; set;}
         public DbSet<FareModel> Fares {get; set;}
         public DbSet<OrderModel> Orders {get; set;}
         public DbSet<PriceModel> Prices {get; set;}
