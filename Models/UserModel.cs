@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusPass.Models
 {
-    [Table("Customers")]
+    [Table("Users")]
     public class UserModel
     {
         public int Id {get; set;}

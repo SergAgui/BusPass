@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusPass.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210312193647_TableNamesEndWithTable")]
-    partial class TableNamesEndWithTable
+    [Migration("20210312210427_TableNameInstead")]
+    partial class TableNameInstead
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -110,7 +110,7 @@ namespace BusPass.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

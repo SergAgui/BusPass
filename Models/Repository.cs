@@ -49,6 +49,7 @@ namespace BusPass.Models
         //Add new fare to db
         public void NewFare(FareModel fare)
         {
+            bool fareExists = _context.FareTable.Any(f => f.Price.Id == fare.PriceId);
             _context.FareTable.Add(fare);
             _context.SaveChanges();
         }
@@ -136,6 +137,12 @@ namespace BusPass.Models
         public class IncorrectUserException : Exception
         {
             public IncorrectUserException(string message) : base(message)
+            {
+            }
+        }
+        public class IncorrectOrderException : Exception
+        {
+            public IncorrectOrderException(string message) : base(message)
             {
             }
         }
