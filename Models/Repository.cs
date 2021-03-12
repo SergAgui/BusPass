@@ -98,31 +98,31 @@ namespace BusPass.Models
             return _context.ServiceAlerts.ToList();
         }
 
-        //Customer Methods
-        //Find Customer by Id 
-        public CustomerModel FindCustomerId(int id)
+        //User Methods
+        //Find User by Id 
+        public UserModel FindUserId(int id)
         {
-            var customer = _context.Customers.Where(cust => cust.Id == id).FirstOrDefault();
-            return customer;
+            var user = _context.Users.Where(cust => cust.Id == id).FirstOrDefault();
+            return user;
         }
-        //New customer to db
-        public void NewCustomer(CustomerModel customer)
+        //New user to db
+        public void NewUser(UserModel user)
         {
-            _context.Customers.Add(customer);
+            _context.Users.Add(user);
             _context.SaveChanges();
         }
-        //Remove customer acct from db
-        public void RemoveCustomer(int custId)
+        //Remove user acct from db
+        public void RemoveUser(int custId)
         {
-            var customer = FindCustomerId(custId);
-            _context.Customers.Remove(customer);
+            var user = FindUserId(custId);
+            _context.Users.Remove(user);
             _context.SaveChanges();
         }
-        //Update Customer details
-        public void UpdateCustomer(int id)
+        //Update User details
+        public void UpdateUser(int id)
         {
-            var customer = FindCustomerId(id);
-            _context.Customers.Update(customer);
+            var user = FindUserId(id);
+            _context.Users.Update(user);
             _context.SaveChanges();
         }
 
@@ -133,9 +133,9 @@ namespace BusPass.Models
             {
             }
         }
-        public class IncorrectCustomerException : Exception
+        public class IncorrectUserException : Exception
         {
-            public IncorrectCustomerException(string message) : base(message)
+            public IncorrectUserException(string message) : base(message)
             {
             }
         }

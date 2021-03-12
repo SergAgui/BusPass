@@ -11,9 +11,9 @@ namespace BusPass.Models
     public class OrderModel
     {
         public int Id {get; set;}
-        public int CustomerId {get; set;}
+        public int UserId {get; set;}
         [Required]
-        public CustomerModel Customer {get; set;}
+        public UserModel User {get; set;}
         [Required]
         public FareModel Fare {get; set;}
         [DataType(DataType.Date)]

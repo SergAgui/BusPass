@@ -21,9 +21,9 @@ namespace BusPass.Models
         void NewAlert(ServiceAlertModel serviceAlert);
         void RemoveAlert(int id);
 
-        CustomerModel FindCustomerId(int id);
-        void NewCustomer(CustomerModel customer);
-        void RemoveCustomer(int id);
-        void UpdateCustomer(int id);
+        UserModel FindUserId(int id);
+        void NewUser(UserModel user);
+        void RemoveUser(int id);
+        void UpdateUser(int id);
     }
 }
