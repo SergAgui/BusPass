@@ -13,10 +13,10 @@ namespace BusPass.Data
             : base(options)
         {
         }
-        public DbSet<UserModel> Users {get; set;}
-        public DbSet<FareModel> Fares {get; set;}
-        public DbSet<OrderModel> Orders {get; set;}
-        public DbSet<PriceModel> Prices {get; set;}
-        public DbSet<ServiceAlertModel> ServiceAlerts {get; set;}
+        public DbSet<UserModel> UserTable {get; set;}
+        public DbSet<FareModel> FareTable {get; set;}
+        public DbSet<OrderModel> OrderTable {get; set;}
+        public DbSet<PriceModel> PriceTable {get; set;}
+        public DbSet<ServiceAlertModel> ServiceAlertsTable {get; set;}
     }
 }
