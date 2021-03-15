@@ -16,6 +16,7 @@ namespace BusPass.Models
         void NewFare(FareModel fare);
         void UpdateFare(int id);
         void RemoveFare(int id);
+        List<FareModel> AllFares();
 
         ServiceAlertModel FindAlertId(int id);
         void NewAlert(ServiceAlertModel serviceAlert);
@@ -25,5 +26,10 @@ namespace BusPass.Models
         void NewUser(UserModel user);
         void RemoveUser(int id);
         void UpdateUser(int id);
+
+        OrderModel FindOrderId(int id);
+        void NewOrder(OrderModel order);
+        void RemoveOrder(int id);
+        List<OrderModel> OrderList();
     }
 }

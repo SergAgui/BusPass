@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BusPass.Models
 {
@@ -49,9 +48,16 @@ namespace BusPass.Models
         //Add new fare to db
         public void NewFare(FareModel fare)
         {
-            bool fareExists = _context.FareTable.Any(f => f.Price.Id == fare.PriceId);
-            _context.FareTable.Add(fare);
-            _context.SaveChanges();
+            bool fareExists = _context.FareTable.Any(f => f.Fare == fare.Fare);
+            if (!fareExists)
+            {
+                _context.FareTable.Add(fare);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new IncorrectFareException("Fare already exist");
+            }
         }
         //Update Fare details
         public void UpdateFare(int id)
@@ -113,9 +119,9 @@ namespace BusPass.Models
             _context.SaveChanges();
         }
         //Remove user acct from db
-        public void RemoveUser(int custId)
+        public void RemoveUser(int id)
         {
-            var user = FindUserId(custId);
+            var user = FindUserId(id);
             _context.UserTable.Remove(user);
             _context.SaveChanges();
         }
@@ -125,6 +131,47 @@ namespace BusPass.Models
             var user = FindUserId(id);
             _context.UserTable.Update(user);
             _context.SaveChanges();
+        }
+
+        //Order Methods
+        //Find Order by Id
+        public OrderModel FindOrderId(int id)
+        {
+            var order = _context.OrderTable.Where(o => o.Id == id).FirstOrDefault();
+            return order;
+        }
+        //New Order to db
+        public void NewOrder(OrderModel order)
+        {
+            bool orderExists = _context.OrderTable.Any(odr => odr.FareId == order.FareId && odr.Id == order.UserId && odr.PurchaseDate == order.PurchaseDate);
+            bool userExists = _context.UserTable.Any(usr => usr.Id == order.UserId);
+            bool fareExists = _context.FareTable.Any(fr => fr.Id == order.FareId);
+            if(orderExists)
+            {
+                throw new IncorrectOrderException("Order already exists!");
+            }
+            if(!userExists)
+            {
+                throw new IncorrectUserException("Invalid User");
+            }
+            if(!fareExists)
+            {
+                throw new IncorrectFareException("Invalid Fare");
+            }
+                _context.OrderTable.Add(order);
+                _context.SaveChanges();
+        }
+        //Remove order
+        public void RemoveOrder(int id)
+        {
+            var order = FindOrderId(id);
+            _context.OrderTable.Remove(order);
+            _context.SaveChanges();
+        }
+        //List of orders
+        public List<OrderModel> OrderList()
+        {
+            return _context.OrderTable.ToList();
         }
 
         //Exceptions

@@ -14,6 +14,7 @@ namespace BusPass.Models
         public int UserId {get; set;}
         [Required]
         public UserModel User {get; set;}
+        public int FareId{get; set;}
         [Required]
         public FareModel Fare {get; set;}
         [DataType(DataType.Date)]
