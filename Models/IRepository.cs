@@ -26,6 +26,7 @@ namespace BusPass.Models
         void NewUser(UserModel user);
         void RemoveUser(int id);
         void UpdateUser(int id);
+        public List<UserModel> AllUsers();
 
         OrderModel FindOrderId(int id);
         void NewOrder(OrderModel order);
