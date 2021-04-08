@@ -15,5 +15,6 @@ namespace BusPass.Models
         public string FirstName {get; set;}
         [Required]
         public string LastName {get; set;}
+        public string FullName {get => FirstName + " " + LastName;}
     }
 }
