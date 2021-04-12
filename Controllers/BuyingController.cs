@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusPass.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,11 @@ namespace BusPass.Controllers
 {
     public class BuyingController : Controller
     {
+        private readonly IRepository repository;
+        public BuyingController(IRepository order)
+        {
+            repository = order;
+        }
         // GET: Buying
         public ActionResult Order()
         {
@@ -17,6 +23,12 @@ namespace BusPass.Controllers
 
         // GET: Order info and confirm
         public ActionResult Checkout()
+        {
+            return View();
+        }
+
+        //GET: View previous orders
+        public ActionResult PastOrders()
         {
             return View();
         }
