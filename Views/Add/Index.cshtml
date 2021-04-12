@@ -1,4 +1,30 @@
-﻿@{
+﻿@model IEnumerable<FareModel>
+@{
     ViewData["Title"] = "List of Fares";
 }
-
+<body>
+    <h1>List of Fares</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col">Fare</div>
+            <div class="col">Price</div>
+            <div class="col"></div>
+        </div>
+        @foreach (var fare in Model)
+        {
+            <div class="row">
+                <div class="col">
+                    @Html.DisplayFor(fromModel => fare.Fare)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(fromModel => fare.Price)
+                </div>
+                <div class="col">
+                    <a asp-action="Edit" asp-route-id="@fare.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@fare.Id">Delete</a>
+                </div>
+            </div>
+        }
+    <a asp-action="Add">Add New Fare</a>
+    </div>
+</body>

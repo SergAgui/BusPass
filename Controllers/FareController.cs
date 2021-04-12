@@ -19,12 +19,6 @@ namespace BusPass.Controllers
             return View(repository.AllFares());
         }
 
-        // GET: FareController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: FareController/Create
         public ActionResult Create()
         {
