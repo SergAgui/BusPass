@@ -11,9 +11,9 @@ namespace BusPass.Controllers
     public class BuyingController : Controller
     {
         private readonly IRepository repository;
-        public BuyingController(IRepository order)
+        public BuyingController(IRepository repo)
         {
-            repository = order;
+            repository = repo;
         }
 
         // GET: Buying

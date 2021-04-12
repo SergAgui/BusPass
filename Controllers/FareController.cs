@@ -4,15 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusPass.Models;
 
 namespace BusPass.Controllers
 {
     public class FareController : Controller
     {
+        private readonly IRepository repository;
+        public FareController(IRepository repo) => repository = repo;
+
         // GET: FareController
         public ActionResult Index()
         {
-            return View();
+            return View(repository.AllFares());
         }
 
         // GET: FareController/Details/5
