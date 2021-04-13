@@ -20,7 +20,7 @@ namespace BusPass.Controllers
         }
 
         // GET: FareController/Create
-        public ActionResult Create()
+        public ActionResult Add()
         {
             return View();
         }
@@ -28,7 +28,7 @@ namespace BusPass.Controllers
         // POST: FareController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Add(IFormCollection collection)
         {
             try
             {

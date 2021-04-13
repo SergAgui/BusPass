@@ -1,0 +1,13 @@
+﻿@model FareModel
+@{
+    ViewData["Title"] = "Add New Fare";
+}
+
+<body>
+    <h1>Create A New Fare:</h1>
+    @using (Html.BeginForm("Add", "Fare", FormMethod.Post))
+    {
+        <div asp-validation-summary="ModelOnly" class="alert-danger"></div>
+
+    }
+</body>
