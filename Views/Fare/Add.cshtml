@@ -1,4 +1,5 @@
 ﻿@model FareModel
+
 @{
     ViewData["Title"] = "Add New Fare";
 }
@@ -8,6 +9,15 @@
     @using (Html.BeginForm("Add", "Fare", FormMethod.Post))
     {
         <div asp-validation-summary="ModelOnly" class="alert-danger"></div>
-
+        <div class="form-group">
+            <label asp-for="Id"></label>
+            <div>@ViewData[nameof(FareModel.Id)]</div>
+            <span asp-validation-for="Id" class="alert-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Fare"></label>
+            <input asp-for="Fare" class="form-control" />
+            <span asp-validation-for="Fare" class="alert-danger"></span>
+        </div>
     }
 </body>
