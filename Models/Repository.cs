@@ -10,34 +10,6 @@ namespace BusPass.Models
         private readonly ApplicationDbContext _context;
         public Repository(ApplicationDbContext context) => _context = context;
 
-        //Price Methods
-        //Find Price by Id
-        public PriceModel FindPriceId(int id)
-        {
-            var price = _context.PriceTable.Where(price => price.Id == id).FirstOrDefault();
-            return price;
-        }
-        //Add new price to db
-        public void NewPrice(PriceModel price)
-        {
-            _context.PriceTable.Add(price);
-            _context.SaveChanges();
-        }
-        //Update price
-        public void UpdatePrice(int id)
-        {
-            var price = FindPriceId(id);
-            _context.PriceTable.Update(price);
-            _context.SaveChanges();
-        }
-        //Remove Price from db
-        public void RemovePrice(int id)
-        {
-            var price = FindPriceId(id);
-            _context.PriceTable.Remove(price);
-            _context.SaveChanges();
-        }
-
         //Fare Methods
         //Find Fare by Id
         public FareModel FindFareId(int id)

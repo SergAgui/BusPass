@@ -25,7 +25,7 @@
             <select asp-for="FareId" class="form-control">
                 @foreach (FareModel fare in ViewData["NewFare"] as List<FareModel>)
                 {
-                    <option value="@fare.Id">@fare.Fare +" "+ @fare.Price.Price</option>
+                    <option value="@fare.Id">@fare.Fare +" "+ @fare.Price</option>
                 }
             </select>
             <br />

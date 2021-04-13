@@ -12,10 +12,9 @@ namespace BusPass.Models
     public class FareModel
     {
         public int Id {get; set;}
-        public int PriceId {get; set;}
         [Required]
         public string Fare {get; set;}
-        [Required]
-        public PriceModel Price;
+        [Required, DataType(DataType.Currency)]
+        public decimal Price {get; set;}
     }
 }

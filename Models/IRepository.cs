@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 namespace BusPass.Models
 {
     public interface IRepository
-    {
-        PriceModel FindPriceId(int id);
-        void NewPrice(PriceModel price);
-        void UpdatePrice(int id);
-        void RemovePrice(int id);
-        
+    {        
         FareModel FindFareId(int id);
         void NewFare(FareModel fare);
         void UpdateFare(int id);
