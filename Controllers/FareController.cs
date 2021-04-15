@@ -65,7 +65,7 @@ namespace BusPass.Controllers
         }
 
         // POST: FareController/Delete/5
-        [HttpPost]
+        [HttpDelete]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
