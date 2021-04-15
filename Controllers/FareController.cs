@@ -28,58 +28,49 @@ namespace BusPass.Controllers
         // POST: FareController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(IFormCollection collection)
+        public ActionResult Add([Bind("Id,Fare,Price")] FareModel newFare)
         {
-            try
+            if (ModelState.IsValid)
             {
+                repository.NewFare(newFare);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(newFare);
         }
 
         // GET: FareController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(repository.FindFareId(id));
         }
 
         // POST: FareController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit([Bind("Id,Fare,Price")] int id, FareModel editFare)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    repository.UpdateFare(id);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    throw new Repository.IncorrectFareException("Invalid Fare");
+                }
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: FareController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+            return View(editFare);
         }
 
         // POST: FareController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            repository.RemoveFare(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
