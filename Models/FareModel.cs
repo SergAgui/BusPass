@@ -16,7 +16,7 @@ namespace BusPass.Models
         public string Fare {get; set;}
         [Required, DataType(DataType.Currency)]
         public decimal Price {get; set;}
-        public enum Type {SingeService, DayPass, DisabilityPass}
+        public enum Type {SingleService, DayPass, DisabilityPass}
         public Type PassType {get; set;}
     }
 }

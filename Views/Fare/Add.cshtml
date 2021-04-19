@@ -24,10 +24,19 @@
             <input asp-for="Price" class="form-control" />
             <span asp-validation-for="Price" class="alert-danger"></span>
         </div>
+        <div class="form-group">
+            <label asp-for="PassType"></label>
+            <select asp-for="PassType" class="form-control">
+                <option value="@FareModel.Type.SingeService">Single Service</option>
+                <option value="@FareModel.Type.DayPass">Day Pass</option>
+                <option value="@FareModel.Type.DisabilityPass">Disability Service</option>
+            </select>
+        </div>
         <br />
         <br />
         <div class="form-group">
             <input type="submit" value="Save Fare" />
+            <a asp-action="Index">Back to list</a>
         </div>
     }
 </body>
