@@ -11,24 +11,72 @@
             <div class="col">Type of Fare</div>
             <div class="col"></div>
         </div>
+        <br />
         @foreach (var fare in Model)
         {
-            <div class="row">
-                <div class="col">
-                    @Html.DisplayFor(fromModel => fare.Fare)
+            @if (fare.PassType == FareModel.Type.SingleService)
+            {
+                <div class="row">
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => fare.Fare)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => fare.Price)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => fare.PassType)
+                    </div>
+                    <div class="col">
+                        <a asp-action="Edit" asp-route-id="@fare.Id">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@fare.Id">Delete</a>
+                    </div>
                 </div>
-                <div class="col">
-                    @Html.DisplayFor(fromModel => fare.Price)
-                </div>
-                <div class="col">
-                    @Html.DisplayFor(fromModel => fare.PassType)
-                </div>
-                <div class="col">
-                    <a asp-action="Edit" asp-route-id="@fare.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@fare.Id">Delete</a>
-                </div>
-            </div>
+            }
         }
-    <a asp-action="Add">Add New Fare</a>
+        <br />
+        @foreach (var fare in Model)
+        {
+            @if (fare.PassType == FareModel.Type.DayPass)
+            {
+                <div class="row">
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => fare.Fare)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => fare.Price)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => fare.PassType)
+                    </div>
+                    <div class="col">
+                        <a asp-action="Edit" asp-route-id="@fare.Id">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@fare.Id">Delete</a>
+                    </div>
+                </div>
+            }
+        }
+        <br />
+        @foreach (var fare in Model)
+        {
+            @if (fare.PassType == FareModel.Type.DisabilityPass)
+            {
+                <div class="row">
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => fare.Fare)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => fare.Price)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => fare.PassType)
+                    </div>
+                    <div class="col">
+                        <a asp-action="Edit" asp-route-id="@fare.Id">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@fare.Id">Delete</a>
+                    </div>
+                </div>
+            }
+        }
+        <a asp-action="Add">Add New Fare</a>
     </div>
 </body>

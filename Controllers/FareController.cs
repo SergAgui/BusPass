@@ -28,7 +28,7 @@ namespace BusPass.Controllers
         // POST: FareController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind("Id,Fare,Price")] FareModel newFare)
+        public ActionResult Add([Bind("Id,Fare,Price,PassType")] FareModel newFare)
         {
             if (ModelState.IsValid)
             {
@@ -39,6 +39,7 @@ namespace BusPass.Controllers
         }
 
         // GET: FareController/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
             return View(repository.FindFareId(id));
@@ -47,7 +48,7 @@ namespace BusPass.Controllers
         // POST: FareController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind("Id,Fare,Price")] int id, FareModel editFare)
+        public ActionResult Edit([Bind("Id,Fare,Price,PassType")] FareModel editFare, int id)
         {
             if (ModelState.IsValid)
             {

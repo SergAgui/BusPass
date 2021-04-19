@@ -17,6 +17,7 @@ namespace BusPass.Models
         [Required, DataType(DataType.Currency)]
         public decimal Price {get; set;}
         public enum Type {SingleService, DayPass, DisabilityPass}
+        [Required]
         public Type PassType {get; set;}
     }
 }

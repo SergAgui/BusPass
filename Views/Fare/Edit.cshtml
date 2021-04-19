@@ -6,36 +6,41 @@
 
 <body>
     <h1>Edit Fare:</h1>
-    @using (Html.BeginForm("Edit", "Fare", FormMethod.Post))
-    {
-        <div asp-validation-summary="ModelOnly" class="alert-danger"></div>
-        <div class="form-group">
-            <div>@Html.DisplayFor(model => model.Id)</div>
-            <span asp-validation-for="Id" class="alert-danger"></span>
+    <div class="row">
+        <div class="col">
+            @using (Html.BeginForm("Edit", "Fare", FormMethod.Post))
+            {
+                <div asp-validation-summary="ModelOnly" class="alert-danger"></div>
+                <div class="form-group">
+                    <div>@Html.DisplayFor(model => model.Id)</div>
+                    <span asp-validation-for="Id" class="alert-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Fare Title</label>
+                    <input asp-for="Fare" class="form-control" />
+                    <span asp-validation-for="Fare" class="alert-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="alert-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PassType"></label>
+                    <select asp-for="PassType" class="form-control">
+                        <option value="@FareModel.Type.SingleService">Single Service</option>
+                        <option value="@FareModel.Type.DayPass">Day Pass</option>
+                        <option value="@FareModel.Type.DisabilityPass">Disability Service</option>
+                    </select>
+                </div>
+                <br />
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Save Fare" />
+                    <a asp-action="Index">Back to list</a>
+                </div>
+            }
         </div>
-        <div class="form-group">
-            <label>Fare Title</label>
-            <input asp-for="Fare" class="form-control" />
-            <span asp-validation-for="Fare" class="alert-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Price"></label>
-            <input asp-for="Price" class="form-control" />
-            <span asp-validation-for="Price" class="alert-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="PassType"></label>
-            <select asp-for="PassType" class="form-control">
-                <option value="@FareModel.Type.SingeService">Single Service</option>
-                <option value="@FareModel.Type.DayPass">Day Pass</option>
-                <option value="@FareModel.Type.DisabilityPass">Disability Service</option>
-            </select>
-        </div>
-        <br />
-        <br />
-        <div class="form-group">
-            <input type="submit" value="Save Fare" />
-            <a asp-action="Index">Back to list</a>
-        </div>
-    }
+        <div class="col"></div>
+    </div>
 </body>
