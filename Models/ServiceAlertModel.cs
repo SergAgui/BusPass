@@ -13,5 +13,7 @@ namespace BusPass.Models
         public int Id { get; set; }
         [Required]
         public string Message { get; set; }
+        public enum Type {Current, Event}
+        public Type AlertType {get; set;}
     }
 }
