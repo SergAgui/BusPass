@@ -39,7 +39,6 @@ namespace BusPass.Controllers
         }
 
         // GET: FareController/Edit/5
-        [HttpGet]
         public ActionResult Edit(int id)
         {
             return View(repository.FindFareId(id));
@@ -50,11 +49,15 @@ namespace BusPass.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind("Id,Fare,Price,PassType")] FareModel editFare, int id)
         {
+            if (id != editFare.Id)
+            {
+                return NotFound();
+            }
             if (ModelState.IsValid)
             {
                 try
                 {
-                    repository.UpdateFare(id);
+                    repository.UpdateFare(editFare);
                     return RedirectToAction(nameof(Index));
                 }
                 catch

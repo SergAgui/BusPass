@@ -32,9 +32,8 @@ namespace BusPass.Models
             }
         }
         //Update Fare details
-        public void UpdateFare(int id)
+        public void UpdateFare(FareModel fare)
         {
-            var fare = FindFareId(id);
             _context.FareTable.Update(fare);
             _context.SaveChanges();
         }
@@ -98,9 +97,8 @@ namespace BusPass.Models
             _context.SaveChanges();
         }
         //Update User details
-        public void UpdateUser(int id)
+        public void UpdateUser(UserModel user)
         {
-            var user = FindUserId(id);
             _context.UserTable.Update(user);
             _context.SaveChanges();
         }

@@ -9,7 +9,7 @@ namespace BusPass.Models
     {        
         FareModel FindFareId(int id);
         void NewFare(FareModel fare);
-        void UpdateFare(int id);
+        void UpdateFare(FareModel fare);
         void RemoveFare(int id);
         List<FareModel> AllFares();
 
@@ -20,7 +20,7 @@ namespace BusPass.Models
         UserModel FindUserId(int id);
         void NewUser(UserModel user);
         void RemoveUser(int id);
-        void UpdateUser(int id);
+        void UpdateUser(UserModel user);
         public List<UserModel> AllUsers();
 
         OrderModel FindOrderId(int id);
