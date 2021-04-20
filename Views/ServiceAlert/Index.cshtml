@@ -10,21 +10,45 @@
             <div class="col">Type of Alert</div>
             <div class="col"></div>
         </div>
+        <hr />
         @foreach (var serviceAlert in Model)
         {
-            <div class="row">
-                <div class="col">
-                    @Html.DisplayFor(fromModel => serviceAlert.Message)
+            @if (serviceAlert.AlertType == ServiceAlertModel.Type.Current)
+            {
+                <div class="row">
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => serviceAlert.Message)
+                    </div>
+                    <div class=" col">
+                        @Html.DisplayFor(fromModel => serviceAlert.AlertType)
+                    </div>
+                    <div class="col">
+                        <a asp-action="Edit" asp-route-id="@serviceAlert.Id">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@serviceAlert.Id">Delete</a>
+                    </div>
                 </div>
-                <div class=" col">
-                    @Html.DisplayFor(fromModel => serviceAlert.AlertType) 
-                </div>
-                <div class="col">
-                    <a asp-action="Edit" asp-route-id="@serviceAlert.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@serviceAlert.Id">Delete</a>
-                </div>
-            </div>
+            }
         }
+        <br />
+        @foreach (var serviceAlert in Model)
+        {
+            @if (serviceAlert.AlertType == ServiceAlertModel.Type.Event)
+            {
+                <div class="row">
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => serviceAlert.Message)
+                    </div>
+                    <div class=" col">
+                        @Html.DisplayFor(fromModel => serviceAlert.AlertType)
+                    </div>
+                    <div class="col">
+                        <a asp-action="Edit" asp-route-id="@serviceAlert.Id">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@serviceAlert.Id">Delete</a>
+                    </div>
+                </div>
+            }
+        }
+        <br />
         <a asp-action="Add">Add New Alert</a>
     </div>
 </body>
