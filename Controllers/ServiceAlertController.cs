@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BusPass.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,20 +10,17 @@ namespace BusPass.Controllers
 {
     public class ServiceAlertController : Controller
     {
+        private readonly IRepository repository;
+        public ServiceAlertController(IRepository repo) => repository = repo;
+
         // GET: ServiceAlertController
         public ActionResult Index()
         {
-            return View();
-        }
-
-        // GET: ServiceAlertController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+            return View(repository.AllAlerts());
         }
 
         // GET: ServiceAlertController/Create
-        public ActionResult Create()
+        public ActionResult Add()
         {
             return View();
         }
@@ -30,58 +28,21 @@ namespace BusPass.Controllers
         // POST: ServiceAlertController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Add([Bind("Id,Message,AlertType")]ServiceAlertModel serviceAlert)
         {
-            try
+            if(ModelState.IsValid)
             {
+                repository.NewAlert(serviceAlert);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ServiceAlertController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ServiceAlertController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ServiceAlertController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+            return View(serviceAlert);
         }
 
         // POST: ServiceAlertController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            repository.RemoveAlert(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

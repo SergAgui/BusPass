@@ -16,6 +16,7 @@ namespace BusPass.Models
         ServiceAlertModel FindAlertId(int id);
         void NewAlert(ServiceAlertModel serviceAlert);
         void RemoveAlert(int id);
+        public List<ServiceAlertModel> AllAlerts();
 
         UserModel FindUserId(int id);
         void NewUser(UserModel user);
