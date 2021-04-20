@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<FareModel>
+@{
     ViewData["Title"] = "Fares and Passes";
 }
 
@@ -54,18 +55,20 @@
             <div class="card-body">
                 <div class="row">
                     <table class="table table-bordered table-hover col">
-                        <tr>
-                            <td>Single Ride Fare</td>
-                            <td>$1.25</td>
-                        </tr>
-                        <tr>
-                            <td>Single Reduced Fare</td>
-                            <td>$0.60</td>
-                        </tr>
-                        <tr>
-                            <td>Disability Access</td>
-                            <td>$1.75</td>
-                        </tr>
+                        @foreach (var fareModel in Model)
+                        {
+                            @if (fareModel.PassType == FareModel.Type.SingleService)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(fromModel => fareModel.Fare)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(fromModel => fareModel.Price)
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                     <div class="col"></div>
                 </div>
@@ -85,18 +88,20 @@
             <div class="card-body">
                 <div class="row">
                     <table class="table table-bordered table-hover col">
-                        <tr>
-                            <td>Single Day Fare</td>
-                            <td>$2.50</td>
-                        </tr>
-                        <tr>
-                            <td>Reduced Day Pass Fare</td>
-                            <td>$1.25</td>
-                        </tr>
-                        <tr>
-                            <td>Disability Day Access</td>
-                            <td>$3.00</td>
-                        </tr>
+                        @foreach (var fareModel in Model)
+                        {
+                            @if (fareModel.PassType == FareModel.Type.DayPass)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(fromModel => fareModel.Fare)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(fromModel => fareModel.Price)
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                     <div class="col"></div>
                 </div>
@@ -116,14 +121,20 @@
             <div class="card-body">
                 <div class="row">
                     <table class="table table-bordered table-hover col">
-                        <tr>
-                            <td>10 Ride Booklet</td>
-                            <td>$17.50</td>
-                        </tr>
-                        <tr>
-                            <td>Monthly Pass</td>
-                            <td>$46.50</td>
-                        </tr>
+                        @foreach (var fareModel in Model)
+                        {
+                            @if (fareModel.PassType == FareModel.Type.DisabilityPass)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(fromModel => fareModel.Fare)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(fromModel => fareModel.Price)
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                     <div class="col"></div>
                 </div>

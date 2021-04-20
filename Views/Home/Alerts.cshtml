@@ -1,17 +1,31 @@
-﻿
+﻿@model IEnumerable<ServiceAlertModel>
 @{
-    ViewData["Title"] = "Alerts";
+    ViewData["Title"] = "Current Service Alerts";
 }
-<!--Admins should be able to change alerts-->
+
 <h1>Current Alerts</h1>
 <ul class="bg-light">
-    <li>Bus 330 is down for maintenance at stop 8</li>
-    <li>Bus 242 late due to accident on highway 34</li>
+@foreach (var serviceAlert in Model)
+{
+    @if (serviceAlert.AlertType == ServiceAlertModel.Type.Current)
+    {
+        <li class="row">
+            @Html.DisplayFor(fromModel => serviceAlert.Message)
+        </li>
+    }
+}
 </ul>
 <br />
 <h1>Event Related Alerts</h1>
 <ul class="bg-light">
-    <li>Tuesday 8/14: School starts! Expect traffic and plan accordingly.</li>
-    <li>Saturday 8/18: Prep for detour around the Marathon.</li>
+@foreach (var serviceAlert in Model)
+{
+    @if (serviceAlert.AlertType == ServiceAlertModel.Type.Event)
+    {
+        <li class="row">
+            @Html.DisplayFor(fromModel => serviceAlert.Message)
+        </li>
+    }
+}
 </ul>
 
