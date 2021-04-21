@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ServiceAlertModel>
+@{
+    ViewData["Title"] = "Current Service Alerts";
+}
+
+<h1>Current Alerts</h1>
+<ul class="bg-light">
+@foreach (var serviceAlert in Model)
+{
+    @if (serviceAlert.AlertType == ServiceAlertModel.Type.Current)
+    {
+        <li class="row">
+            @Html.DisplayFor(fromModel => serviceAlert.Message)
+        </li>
+    }
+}
+</ul>
+<br />
+<h1>Event Related Alerts</h1>
+<ul class="bg-light">
+@foreach (var serviceAlert in Model)
+{
+    @if (serviceAlert.AlertType == ServiceAlertModel.Type.Event)
+    {
+        <li class="row">
+            @Html.DisplayFor(fromModel => serviceAlert.Message)
+        </li>
+    }
+}
+</ul>
+

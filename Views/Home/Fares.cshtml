@@ -1,0 +1,151 @@
+﻿@model IEnumerable<FareModel>
+@{
+    ViewData["Title"] = "Fares and Passes";
+}
+
+<img class="align-content-center w-100" style="height: fit-content;" src="~/images/zoomBus.jpg" title="Fare-Info" alt="Fare-Info" />
+<br />
+<br />
+<h1>Fares and Passes</h1>
+<br />
+<div id="accordion">
+    <div class="card">
+        <div class="card-header bg-info" id="headingOne">
+            <h3 class="mb-0">
+                <button class="btn btn-info" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                        aria-controls="collapseOne">
+                    Kids ride free!
+                </button>
+            </h3>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+                <ul>
+                    <li>K-12 studends with valid ID</li>
+                    <li>Children below the age of 10 must be accompanied by someone 12 or older</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header bg-info" id="headingTwo">
+            <h3 class="mb-0">
+                <button class="btn btn-info collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo">
+                    Military Personnel
+                </button>
+            </h3>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+                Military personnel in uniform ride free! Acitve-duty military personnel not in uniform qualify for reduced fares with valid military ID.
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header bg-info" id="headingThree">
+            <h3 class="mb-0">
+                <button class="btn btn-info collapsed" data-toggle="collapse" data-target="#collapseThree"
+                        aria-expanded="false" aria-controls="collapseThree">
+                    Single Ride Service
+                </button>
+            </h3>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-bordered table-hover col">
+                        @foreach (var fareModel in Model)
+                        {
+                            @if (fareModel.PassType == FareModel.Type.SingleService)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(fromModel => fareModel.Fare)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(fromModel => fareModel.Price)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header bg-info" id="headingFour">
+            <h3 class="mb-0">
+                <button class="btn btn-info collapsed" data-toggle="collapse" data-target="#collapseFour"
+                        aria-expanded="false" aria-controls="collapseFour">
+                    Day Passes
+                </button>
+            </h3>
+        </div>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-bordered table-hover col">
+                        @foreach (var fareModel in Model)
+                        {
+                            @if (fareModel.PassType == FareModel.Type.DayPass)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(fromModel => fareModel.Fare)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(fromModel => fareModel.Price)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header bg-info" id="headingFive">
+            <h3 class="mb-0">
+                <button class="btn btn-info collapsed" data-toggle="collapse" data-target="#collapseFive"
+                        aria-expanded="false" aria-controls="collapseFive">
+                    Disability Passes
+                </button>
+            </h3>
+        </div>
+        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-bordered table-hover col">
+                        @foreach (var fareModel in Model)
+                        {
+                            @if (fareModel.PassType == FareModel.Type.DisabilityPass)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(fromModel => fareModel.Fare)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(fromModel => fareModel.Price)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col w-100"></div>
+    <div class="col align-items-end">
+        <a asp-controller="Buying" asp-action="Order"
+           class="btn btn-primary btn-lg float-right">Order Here</a>
+    </div>
+</div>

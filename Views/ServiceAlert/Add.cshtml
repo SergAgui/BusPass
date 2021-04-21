@@ -1,0 +1,37 @@
+﻿@model  ServiceAlertModel
+@{
+    ViewData["Title"] = "New Service Alert";
+}
+
+<body>
+    <h1>Add New Service Alert</h1>
+    <div class="row">
+        <div class="col">
+            @using (Html.BeginForm("Add", "ServiceAlert", FormMethod.Post))
+            {
+                <div asp-validation-summary="ModelOnly" class="alert-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Message"></label>
+                    <input asp-for="Message" class="form-control" />
+                    <span asp-validation-for="Message" class="alert-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AlertType"></label>
+                    <select asp-for="AlertType" class="form-control">
+                        <option>Select One</option>
+                        <option value="@ServiceAlertModel.Type.Current">Current Alert</option>
+                        <option value="@ServiceAlertModel.Type.Event">Event Alert</option>
+                    </select>
+                    <span asp-validation-for="AlertType" class="alert-danger"></span>
+                </div>
+                <br />
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Save Service Alert" />
+                    <a asp-action="Index">Back to list</a>
+                </div>
+            }
+        </div>
+        <div class="col"></div>
+    </div>
+</body>

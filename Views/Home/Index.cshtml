@@ -2,32 +2,39 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div>
+<div id="mainBody">
     <div class="container">
         <div class="row">
             <div class="col-xl-1">
-                <h1 class="display-4">Welcome</h1>
+                <h1 class="display-4">Welcome!</h1>
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container bg-light">
         <div class="row justify-content-center">
             <div class="col">
                 <h2>Fares & Passes</h2>
-                <p>Choose an option that fits your needs - from a single day ride to 31 day service pass.</p>
-                <button>Find Fare Information</button>
+                <p>Choose an option that fits your needs - from a single ride to 31 day service pass.</p>
+                <a asp-controller="Home" asp-action="Fares" 
+                   class="btn btn-primary btn-lg">Find Fare Information</a>
             </div>
             <div class="col">
                 <h2>Service Alerts</h2>
                 <p>Check for detours, delays, and closures.</p>
-                <button>Find Service Alerts</button>
+                <a asp-controller="Home" asp-action="Alerts"
+                   class="btn btn-primary btn-lg">Find Service Alerts</a>
             </div>
         </div>
         <br /><br />
         <div class="row">
             <div class="col align-items-end align-self-end">
                 <h1>Buy your passes online now!</h1>
-                <button>Buy online</button>
+                <a asp-controller="Buying" asp-action="Order"
+                   class="btn btn-primary btn-lg">Buy online</a>
+            </div>
+            <div class="col align-self-end">
+                <a asp-controller="Fare" asp-action="Index">Create New Fare</a>
+                <a asp-controller="ServiceAlert" asp-action="Index">Create New Alert</a>
             </div>
         </div>
     </div>

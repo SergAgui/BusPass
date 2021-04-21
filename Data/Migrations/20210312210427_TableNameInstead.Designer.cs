@@ -4,19 +4,21 @@ using BusPass.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BusPass.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210312210427_TableNameInstead")]
+    partial class TableNameInstead
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BusPass.Models.FareModel", b =>
@@ -30,12 +32,6 @@ namespace BusPass.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PassType")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Fares");
@@ -48,7 +44,7 @@ namespace BusPass.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FareId")
+                    b.Property<int?>("FareId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("PurchaseDate")
@@ -66,15 +62,27 @@ namespace BusPass.Data.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("BusPass.Models.ServiceAlertModel", b =>
+            modelBuilder.Entity("BusPass.Models.PriceModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AlertType")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Prices");
+                });
+
+            modelBuilder.Entity("BusPass.Models.ServiceAlertModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -309,9 +317,7 @@ namespace BusPass.Data.Migrations
                 {
                     b.HasOne("BusPass.Models.FareModel", "Fare")
                         .WithMany()
-                        .HasForeignKey("FareId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FareId");
 
                     b.HasOne("BusPass.Models.UserModel", "User")
                         .WithMany()
