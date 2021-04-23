@@ -32,14 +32,6 @@ namespace BusPass.Controllers
         {
             await roleManager.CreateAsync(role);
             return RedirectToAction("Index");
-            /*try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }*/
         }
 
         // GET: RoleController/Delete/5

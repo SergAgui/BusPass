@@ -3,3 +3,23 @@
     ViewData["Title"] = "List of Roles";
 }
 
+<body>
+    <h1>Current Roles</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col">Role</div>
+            <div class="col">User</div>
+        </div>
+        <hr />
+        <br />
+        @foreach (var role in Model)
+        {
+            <div class="row">
+                <div class="col">@role.Id</div>
+                <div class="col">@role.Name</div>
+            </div>
+        }
+        <br />
+        <a asp-action="Create">Add New Role</a>
+    </div>
+</body>
