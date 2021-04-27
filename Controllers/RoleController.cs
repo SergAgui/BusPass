@@ -34,25 +34,23 @@ namespace BusPass.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: RoleController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         // POST: RoleController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(string id)
         {
-            try
+            var role = await roleManager.FindByIdAsync(id);
+            if (role != null)
             {
-                return RedirectToAction(nameof(Index));
+                var result = await roleManager.DeleteAsync(role);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                    NotFound();
             }
-            catch
-            {
-                return View();
-            }
+            else
+                ModelState.AddModelError("", "No role found");
+            return View("Index", roleManager.Roles);
         }
     }
 }
