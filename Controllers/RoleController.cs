@@ -10,8 +10,13 @@ namespace BusPass.Controllers
 {
     public class RoleController : Controller
     {
-        RoleManager<IdentityRole> roleManager;
-        public RoleController(RoleManager<IdentityRole> roleMan) => roleManager = roleMan;
+        private RoleManager<IdentityRole> roleManager;
+        private UserManager<IdentityUser> userManager;
+        public RoleController(RoleManager<IdentityRole> roleMan, UserManager<IdentityUser> userMan)
+        {
+            roleManager = roleMan;
+            userManager = userMan;
+        }
 
         // GET: RoleController
         public ActionResult Index()
@@ -22,7 +27,7 @@ namespace BusPass.Controllers
         // GET: RoleController/Create
         public ActionResult Create()
         {
-            return View(new IdentityRole());
+            return View();
         }
 
         // POST: RoleController/Create
@@ -30,8 +35,12 @@ namespace BusPass.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(IdentityRole role)
         {
-            await roleManager.CreateAsync(role);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                await roleManager.CreateAsync(role);
+                return RedirectToAction("Index");
+            }
+            return View(role);
         }
 
         // POST: RoleController/Delete/5
@@ -46,11 +55,32 @@ namespace BusPass.Controllers
                     return RedirectToAction("Index");
                 }
                 else
-                    NotFound();
+                {
+                    Error(result);
+                }
             }
             else
+            {
                 ModelState.AddModelError("", "No role found");
+            }
             return View("Index", roleManager.Roles);
+        }
+
+        // GET: RoleController/Edit/5
+        public IActionResult Edit(string id)
+        {
+            return View(roleManager.FindByIdAsync(id));
+        }
+
+        // POST: RoleController/Edit/5
+
+
+        private void Error(IdentityResult result)
+        {
+            foreach(IdentityError error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
         }
     }
 }
