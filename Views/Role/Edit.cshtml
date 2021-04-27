@@ -9,7 +9,22 @@
         <div class="col">
             @using (Html.BeginForm("Edit", "Role", FormMethod.Post))
             {
-
+                <h2>Add to @Model.Role.Name</h2>
+                <br />
+                <div asp-validation-summary="ModelOnly" class="alert-danger"></div>
+                <label asp-for="NonMembers"></label>
+                if (Model.NonMembers.Count() == 0)
+                {
+                    <div>All users are in @Model.Role.Name</div>
+                }
+                else
+                {
+                    @foreach (var user in Model.NonMembers)
+                    {
+                        <div class="col">@user.UserName</div>
+                        <div class="col"></div>
+                    }
+                }
             }
         </div>
     </div>
