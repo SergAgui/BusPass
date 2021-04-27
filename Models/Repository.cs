@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 
 namespace BusPass.Models
 {
@@ -78,7 +79,7 @@ namespace BusPass.Models
 
         //User Methods
         //List of all users
-        public List<Microsoft.AspNetCore.Identity.IdentityUser> AllUsers()
+        public List<IdentityUser> AllUsers()
         {
             return _context.Users.ToList();
         }

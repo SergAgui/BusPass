@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,6 +20,7 @@ namespace BusPass.Controllers
         }
 
         // GET: RoleController
+        [Authorize]
         public ActionResult Index()
         {
             return View(roleManager.Roles);
@@ -73,7 +75,24 @@ namespace BusPass.Controllers
         }
 
         // POST: RoleController/Edit/5
-
+        public async Task<IActionResult> Edit(string id, IdentityRole role)
+        {
+            IdentityResult result;
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByIdAsync(id);
+                if (user != null)
+                {
+                    result = await userManager.AddToRoleAsync(user, role.Name);
+                    if (!result.Succeeded)
+                    {
+                        Error(result);
+                    }
+                }
+                return View(nameof(Index));
+            }
+            return View(role);
+        }
 
         private void Error(IdentityResult result)
         {
