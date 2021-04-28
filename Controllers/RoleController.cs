@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using BusPass.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BusPass.Controllers
@@ -20,7 +17,6 @@ namespace BusPass.Controllers
         }
 
         // GET: RoleController
-        [Authorize]
         public ActionResult Index()
         {
             return View(roleManager.Roles);
@@ -69,34 +65,60 @@ namespace BusPass.Controllers
         }
 
         // GET: RoleController/Edit/5
-        public IActionResult Edit(string id)
+        public async Task<IActionResult> Edit(string id)
         {
-            return View(roleManager.FindByIdAsync(id));
+            IdentityRole role = await roleManager.FindByIdAsync(id);
+            List<IdentityUser> members = new List<IdentityUser>();
+            List<IdentityUser> nonMembers = new List<IdentityUser>();
+            foreach (var user in userManager.Users)
+            {
+                var list = await userManager.IsInRoleAsync(user, role.Name) ? members : nonMembers;
+                list.Add(user);
+            }
+            return View(new RoleLists
+            {
+                Role = role,
+                Members = members,
+                NonMembers = nonMembers
+            });
         }
 
         // POST: RoleController/Edit/5
-        public async Task<IActionResult> Edit(string id, IdentityRole role)
+        public async Task<IActionResult> Edit(RoleInfo info)
         {
             IdentityResult result;
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByIdAsync(id);
-                if (user != null)
+                foreach (string userId in info.AddId ?? new string[] { })
                 {
-                    result = await userManager.AddToRoleAsync(user, role.Name);
-                    if (!result.Succeeded)
+                    var user = await userManager.FindByIdAsync(info.RoleId);
+                    if (user != null)
                     {
-                        Error(result);
+                        result = await userManager.AddToRoleAsync(user, info.RoleName);
+                        if (!result.Succeeded)
+                        {
+                            Error(result);
+                        }
+                    }
+                }
+                foreach (string userId in info.RemoveId ?? new string[] { })
+                {
+                    var user = await userManager.FindByIdAsync(userId);
+                    if (user != null)
+                    {
+                        result = await userManager.RemoveFromRoleAsync(user, info.RoleName);
+                        if (!result.Succeeded)
+                            Error(result);
                     }
                 }
                 return View(nameof(Index));
             }
-            return View(role);
+            return View(info);
         }
 
         private void Error(IdentityResult result)
         {
-            foreach(IdentityError error in result.Errors)
+            foreach (IdentityError error in result.Errors)
             {
                 ModelState.AddModelError("", error.Description);
             }
