@@ -84,6 +84,8 @@ namespace BusPass.Controllers
         }
 
         // POST: RoleController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(RoleInfo info)
         {
             IdentityResult result;
@@ -91,7 +93,7 @@ namespace BusPass.Controllers
             {
                 foreach (string userId in info.AddId ?? new string[] { })
                 {
-                    var user = await userManager.FindByIdAsync(info.RoleId);
+                    var user = await userManager.FindByIdAsync(userId);
                     if (user != null)
                     {
                         result = await userManager.AddToRoleAsync(user, info.RoleName);
@@ -111,7 +113,7 @@ namespace BusPass.Controllers
                             Error(result);
                     }
                 }
-                return View(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
             return View(info);
         }

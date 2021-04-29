@@ -23,15 +23,16 @@
                 {
                     @foreach (var user in Model.NonMembers)
                     {
-                        <div class="col form-group">@user.UserName</div>
-                        <div class="col form-group">
-                            <input type="checkbox" name="AddId" value="@user.Id" />
+                        <div class="row">
+                            <div class="col form-group">@user.UserName</div>
+                            <div class="col form-group">
+                                <input type="checkbox" name="AddId" value="@user.Id" />
+                            </div>
                         </div>
                     }
                 }
                 <br />
                 <hr />
-                <br />
                 <h2>Remove from @Model.Role.Name</h2>
                 <br />
                 <label asp-for="Members"></label>
@@ -43,9 +44,11 @@
                 {
                     @foreach (var user in Model.Members)
                     {
-                        <div class="col form-group">@user.UserName</div>
-                        <div class="col form-group">
-                            <input type="checkbox" name="RemoveId" value="@user.Id" />
+                        <div class="row">
+                            <div class="col form-group">@user.UserName</div>
+                            <div class="col form-group">
+                                <input type="checkbox" name="RemoveId" value="@user.Id" />
+                            </div>
                         </div>
                     }
                 }
