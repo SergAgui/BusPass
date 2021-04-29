@@ -35,10 +35,9 @@ namespace BusPass
             });
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("BusPassDb")));
-            //TODO: AddIdentity<IdentityUser, IdentityRole>() doesn't let users Register nor show left ManageNav when logged in
+                options.UseSqlServer(Configuration.GetConnectionString("BusPassDb")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
             services.AddTransient<IRepository, Repository>();
