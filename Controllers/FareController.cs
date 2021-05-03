@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusPass.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BusPass.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class FareController : Controller
     {
         private readonly IRepository repository;
