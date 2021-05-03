@@ -31,7 +31,10 @@
                 </div>
             }
         }
-        <br />
-        <a asp-action="Create">Add New Role</a>
+        @if (User.IsInRole("Administrator"))
+        {
+            <br />
+            <a asp-action="Create" class="btn btn-primary">Add New Role</a>
+        }
     </div>
 </body>

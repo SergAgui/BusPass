@@ -1,4 +1,5 @@
 ﻿using BusPass.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusPass.Controllers
 {
+    [Authorize(Roles ="Administrator, Manager")]
     public class ServiceAlertController : Controller
     {
         private readonly IRepository repository;
