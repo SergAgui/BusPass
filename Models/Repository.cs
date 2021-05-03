@@ -96,7 +96,6 @@ namespace BusPass.Models
         {
             bool orderExists = _context.OrderTable.Any(odr => odr.FareId == order.FareId && odr.UserId == order.UserId && odr.PurchaseDate == order.PurchaseDate);
             bool userExists = _context.Users.Any(usr => usr.Id == order.UserId);
-            //_context.UserTable.Any(usr => usr.Id == order.UserId);
             bool fareExists = _context.FareTable.Any(fr => fr.Id == order.FareId);
             if(orderExists)
             {

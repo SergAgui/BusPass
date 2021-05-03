@@ -22,7 +22,9 @@ namespace BusPass.Controllers
             return View();
         }
 
-        // GET: Order info and confirm
+        // POST: Bying/Checkout
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Checkout()
         {
             return View();
@@ -31,36 +33,7 @@ namespace BusPass.Controllers
         //GET: View previous orders
         public ActionResult PastOrders()
         {
-            return View();
-        }
-
-        // GET: Buying/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Buying/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Buying/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return View(repository.OrderList());
         }
 
         // GET: Buying/Edit/5
@@ -69,25 +42,8 @@ namespace BusPass.Controllers
             return View();
         }
 
-        // POST: Buying/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: Buying/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Refund(int id)
         {
             return View();
         }
@@ -95,12 +51,10 @@ namespace BusPass.Controllers
         // POST: Buying/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Refund(int id, IFormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
-
                 return RedirectToAction(nameof(Index));
             }
             catch

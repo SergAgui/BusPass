@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace BusPass.Models
 {
@@ -18,7 +20,7 @@ namespace BusPass.Models
         void RemoveAlert(int id);
         public List<ServiceAlertModel> AllAlerts();
 
-        public List<Microsoft.AspNetCore.Identity.IdentityUser> AllUsers();
+        public List<IdentityUser> AllUsers();
 
         OrderModel FindOrderId(int id);
         void NewOrder(OrderModel order);
