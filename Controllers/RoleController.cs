@@ -1,4 +1,5 @@
 ﻿using BusPass.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusPass.Controllers
 {
+    [Authorize(Roles = "Manager, Administrator")]
     public class RoleController : Controller
     {
         private RoleManager<IdentityRole> roleManager;
@@ -23,6 +25,7 @@ namespace BusPass.Controllers
         }
 
         // GET: RoleController/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -31,6 +34,7 @@ namespace BusPass.Controllers
         // POST: RoleController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create(IdentityRole role)
         {
             if (ModelState.IsValid)
@@ -41,28 +45,6 @@ namespace BusPass.Controllers
             return View(role);
         }
 
-        // POST: RoleController/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            var role = await roleManager.FindByIdAsync(id);
-            if (role != null)
-            {
-                var result = await roleManager.DeleteAsync(role);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    Error(result);
-                }
-            }
-            else
-            {
-                ModelState.AddModelError("", "No role found");
-            }
-            return View("Index", roleManager.Roles);
-        }
 
         // GET: RoleController/Edit/5
         public async Task<IActionResult> Edit(string id)
@@ -110,12 +92,38 @@ namespace BusPass.Controllers
                     {
                         result = await userManager.RemoveFromRoleAsync(user, info.RoleName);
                         if (!result.Succeeded)
+                        {
                             Error(result);
+                        }
                     }
                 }
                 return RedirectToAction(nameof(Index));
             }
             return View(info);
+        }
+
+        // POST: RoleController/Delete/5
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+            if (role != null)
+            {
+                var result = await roleManager.DeleteAsync(role);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    Error(result);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "No role found");
+            }
+            return View("Index", roleManager.Roles);
         }
 
         private void Error(IdentityResult result)
