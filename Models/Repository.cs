@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 
 namespace BusPass.Models
 {
@@ -77,35 +78,10 @@ namespace BusPass.Models
         }
 
         //User Methods
-        //Find User by Id 
-        public UserModel FindUserId(int id)
-        {
-            var user = _context.UserTable.Where(cust => cust.Id == id).FirstOrDefault();
-            return user;
-        }
-        //New user to db
-        public void NewUser(UserModel user)
-        {
-            _context.UserTable.Add(user);
-            _context.SaveChanges();
-        }
-        //Remove user acct from db
-        public void RemoveUser(int id)
-        {
-            var user = FindUserId(id);
-            _context.UserTable.Remove(user);
-            _context.SaveChanges();
-        }
-        //Update User details
-        public void UpdateUser(UserModel user)
-        {
-            _context.UserTable.Update(user);
-            _context.SaveChanges();
-        }
         //List of all users
-        public List<UserModel> AllUsers()
+        public List<IdentityUser> AllUsers()
         {
-            return _context.UserTable.ToList();
+            return _context.Users.ToList();
         }
 
         //Order Methods
@@ -119,7 +95,8 @@ namespace BusPass.Models
         public void NewOrder(OrderModel order)
         {
             bool orderExists = _context.OrderTable.Any(odr => odr.FareId == order.FareId && odr.UserId == order.UserId && odr.PurchaseDate == order.PurchaseDate);
-            bool userExists = _context.UserTable.Any(usr => usr.Id == order.UserId);
+            bool userExists = _context.Users.Any(usr => usr.Id == order.UserId);
+            //_context.UserTable.Any(usr => usr.Id == order.UserId);
             bool fareExists = _context.FareTable.Any(fr => fr.Id == order.FareId);
             if(orderExists)
             {

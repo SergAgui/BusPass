@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,9 +12,9 @@ namespace BusPass.Models
     public class OrderModel
     {
         public int Id {get; set;}
-        public int UserId {get; set;}
+        public string UserId {get; set;}
         [Required]
-        public UserModel User {get; set;}
+        public IdentityUser User {get; set;}
         public int FareId{get; set;}
         [Required]
         public FareModel Fare {get; set;}

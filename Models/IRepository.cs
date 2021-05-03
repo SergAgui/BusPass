@@ -18,11 +18,7 @@ namespace BusPass.Models
         void RemoveAlert(int id);
         public List<ServiceAlertModel> AllAlerts();
 
-        UserModel FindUserId(int id);
-        void NewUser(UserModel user);
-        void RemoveUser(int id);
-        void UpdateUser(UserModel user);
-        public List<UserModel> AllUsers();
+        public List<Microsoft.AspNetCore.Identity.IdentityUser> AllUsers();
 
         OrderModel FindOrderId(int id);
         void NewOrder(OrderModel order);
