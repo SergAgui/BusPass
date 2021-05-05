@@ -22,18 +22,18 @@
             </div>
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
         </form>
-        @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
-        {
-            <div class="col-md-3">
-                <a asp-controller="Role" asp-action="Index"
-                   class="btn btn-primary">Add To Role</a>
-                <a asp-controller="Fare" asp-action="Index"
-                   class="btn btn-primary">Create New Fare</a>
-                <a asp-controller="ServiceAlert" asp-action="Index"
-                   class="btn btn-primary">Create New Alert</a>
-            </div>
-        }
     </div>
+    @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+    {
+        <div class="col-md-3 justify-content-end">
+            <a asp-controller="Role" asp-action="Index"
+                class="btn btn-primary">Add To Role</a>
+            <a asp-controller="Fare" asp-action="Index"
+                class="btn btn-primary">Create New Fare</a>
+            <a asp-controller="ServiceAlert" asp-action="Index"
+                class="btn btn-primary">Create New Alert</a>
+        </div>
+    }
 </div>
 
 @section Scripts {
