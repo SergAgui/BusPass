@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusPass.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BusPass.Controllers
@@ -17,8 +18,14 @@ namespace BusPass.Controllers
         }
 
         // GET: Buying
-        public ActionResult Order()
+        public ActionResult Order(IdentityUser user, FareModel fareModel)
         {
+            List<FareModel> NewFare = new List<FareModel>();
+            foreach (var item in repository.AllFares())
+            {
+                NewFare.Add(item);
+            }
+            ViewData["NewFare"] = NewFare;
             return View();
         }
 

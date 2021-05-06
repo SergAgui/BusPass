@@ -1,6 +1,6 @@
 ﻿@model OrderModel
 @{
-    
+    ViewData["Title"] = "Order";
 }
 
 <body>
@@ -22,14 +22,14 @@
             <select asp-for="FareId" class="form-control">
                 @foreach (FareModel fare in ViewData["NewFare"] as List<FareModel>)
                 {
-                    <option value="@fare.Id">@fare.Fare +" "+ @fare.Price</option>
+                    <option value="@fare.Id">@fare.Fare - @Html.DisplayFor(fromModel => fare.Price)</option>
                 }
             </select>
-            <br />
-            <br />
-            <div class="form-group">
-                <input type="submit" value="Checkout" class="btn btn-primary btn-lg" />
-            </div>
+        </div>
+        <br />
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Checkout" asp-action="Checkout" class="btn btn-primary btn-lg" />
         </div>
     }
     <div>
