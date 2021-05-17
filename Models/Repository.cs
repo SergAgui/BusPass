@@ -125,7 +125,15 @@ namespace BusPass.Models
             return _context.OrderTable.ToList();
         }
 
+        //Date Methods
+        //Find year
+        public int DaysInCurrentMonth()
+        {
+            return DateTime.Now.Month;
+        }
+
         //Exceptions
+        //All Exceptions
         public class IncorrectFareException : Exception
         {
             public IncorrectFareException(string message) : base(message)
