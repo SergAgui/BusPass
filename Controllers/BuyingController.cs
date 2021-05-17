@@ -18,7 +18,7 @@ namespace BusPass.Controllers
         }
 
         // GET: Buying
-        public ActionResult Order(IdentityUser user, FareModel fareModel)
+        public ActionResult Order(IdentityUser user)
         {
             List<FareModel> NewFare = new List<FareModel>();
             foreach (var item in repository.AllFares())
@@ -32,21 +32,24 @@ namespace BusPass.Controllers
         // POST: Bying/Checkout
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Checkout()
+        public ActionResult Checkout(OrderModel order)
         {
-            return View();
+            try
+            {
+                repository.NewOrder(order);
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.message = "Invalid Order";
+                return View();
+            }
         }
 
         //GET: View previous orders
         public ActionResult PastOrders()
         {
             return View(repository.OrderList());
-        }
-
-        // GET: Buying/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
         }
 
         // GET: Buying/Delete/5
