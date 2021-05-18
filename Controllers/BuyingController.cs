@@ -52,25 +52,17 @@ namespace BusPass.Controllers
             return View(repository.OrderList());
         }
 
-        // GET: Buying/Delete/5
-        public ActionResult Refund(int id)
+        // GET: Buying/Refund/5
+        public ActionResult Refund()
         {
-            return View();
+            return View(repository.OrderList());
         }
 
-        // POST: Buying/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Refund(int id, IFormCollection collection)
+        // POST: Buying/Refund/5
+        public ActionResult Refund(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            repository.RemoveOrder(id);
+            return RedirectToAction(nameof(Refund));
         }
     }
 }
