@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusPass.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BusPass.Controllers
 {
+    [Authorize]
     public class BuyingController : Controller
     {
         private readonly IRepository repository;
@@ -18,7 +20,7 @@ namespace BusPass.Controllers
         }
 
         // GET: Buying
-        public ActionResult Order(IdentityUser user)
+        public ActionResult Order()
         {
             List<FareModel> NewFare = new List<FareModel>();
             foreach (var item in repository.AllFares())
@@ -32,21 +34,37 @@ namespace BusPass.Controllers
         // POST: Bying/Checkout
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Checkout(OrderModel order)
+        public ActionResult Checkout([Bind("Id,User,Fare,PurchaseDate")]OrderModel order)
         {
-            try
+            if (ModelState.IsValid)
             {
-                repository.NewOrder(order);
-                return View();
+                try
+                {
+                    //TODO: See if it's this part that is directing to Checkout and not Receipt
+                    repository.NewOrder(order);
+                    return View("Receipt");
+                }
+                catch
+                {
+                    throw new Repository.IncorrectOrderException("Invalid Order");
+                }
             }
-            catch (Exception ex)
-            {
-                ViewBag.message = "Invalid Order";
-                return View();
-            }
+            return View(order);
         }
 
-        //GET: View previous orders
+        //GET: Buying/Receipt/5
+        public ActionResult Receipt()
+        {
+            return View(repository.OrderList().Last());
+        }
+
+        //GET: Buying/Receipt/5
+        public ActionResult Receipt(int id)
+        {
+            return View(repository.FindOrderId(id));
+        }
+
+        //GET: Buying/PastOrders
         public ActionResult PastOrders()
         {
             return View(repository.OrderList());
