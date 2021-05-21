@@ -91,11 +91,16 @@ namespace BusPass.Models
             var order = _context.OrderTable.Where(o => o.Id == id).FirstOrDefault();
             return order;
         }
+        public void AddOrder(OrderModel order)
+        {
+            _context.OrderTable.Add(order);
+            _context.SaveChanges();
+        }
         //New Order to db
         public void NewOrder(OrderModel order)
         {
             bool orderExists = _context.OrderTable.Any(odr => odr.FareId == order.FareId && odr.UserId == order.UserId && odr.PurchaseDate == order.PurchaseDate);
-            bool userExists = _context.Users.Any(usr => usr.Id == order.UserId);
+            bool userExists = _context.Users.Any(usr => usr.Id == order.UserId.Id);
             bool fareExists = _context.FareTable.Any(fr => fr.Id == order.FareId);
             if(orderExists)
             {
@@ -109,8 +114,8 @@ namespace BusPass.Models
             {
                 throw new IncorrectFareException("Invalid Fare");
             }
-                _context.OrderTable.Add(order);
-                _context.SaveChanges();
+            AddOrder(order);
+            _context.SaveChanges();
         }
         //Remove order
         public void RemoveOrder(int id)

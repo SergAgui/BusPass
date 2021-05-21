@@ -12,11 +12,10 @@ namespace BusPass.Models
     public class OrderModel
     {
         public int Id {get; set;}
-        public string UserId {get; set;}
-        [Required]
+        public IdentityUser UserId {get; set;}
         public IdentityUser User {get; set;}
-        public int FareId{get; set;}
         [Required]
+        public int FareId{get; set;}
         public FareModel Fare {get; set;}
         [DataType(DataType.Date)]
         public DateTime PurchaseDate {get; set;}

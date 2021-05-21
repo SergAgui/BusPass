@@ -34,13 +34,12 @@ namespace BusPass.Controllers
         // POST: Bying/Checkout
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Order([Bind("Id,User,Fare,PurchaseDate")]OrderModel order)
+        public ActionResult Order([Bind("Id,UserId,FareId,PurchaseDate")]OrderModel order)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //TODO: See if it's this part that is directing to Checkout and not Receipt
                     repository.NewOrder(order);
                     return RedirectToAction(nameof(Receipt));
                 }
@@ -58,16 +57,16 @@ namespace BusPass.Controllers
             return View(repository.OrderList().Last());
         }
 
-        //GET: Buying/Receipt/5
-        /*public ActionResult Receipt(int id)
-        {
-            return View(repository.FindOrderId(id));
-        }*/
-
         //GET: Buying/PastOrders
         public ActionResult PastOrders()
         {
             return View(repository.OrderList());
+        }
+
+        //GET: Buying/Receipt/5
+        public ActionResult PastOrders(int id)
+        {
+            return View(repository.FindOrderId(id));
         }
 
         // POST: Buying/Refund/5
