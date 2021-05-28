@@ -21,6 +21,7 @@ namespace BusPass.Models
         public List<ServiceAlertModel> AllAlerts();
 
         public List<IdentityUser> AllUsers();
+        public IdentityUser FindUserId(string id);
 
         OrderModel FindOrderId(int id);
         void NewOrder(OrderModel order);

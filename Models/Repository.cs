@@ -84,6 +84,13 @@ namespace BusPass.Models
             return _context.Users.ToList();
         }
 
+        //Find User by Id
+        public IdentityUser FindUserId(string id)
+        {
+            var userId = _context.Users.Where(u => u.Id == id).FirstOrDefault();
+            return userId;
+        }
+
         //Order Methods
         //Find Order by Id
         public OrderModel FindOrderId(int id)
@@ -100,7 +107,7 @@ namespace BusPass.Models
         public void NewOrder(OrderModel order)
         {
             bool orderExists = _context.OrderTable.Any(odr => odr.FareId == order.FareId && odr.UserId == order.UserId && odr.PurchaseDate == order.PurchaseDate);
-            bool userExists = _context.Users.Any(usr => usr.Id == order.UserId.Id);
+            bool userExists = _context.Users.Any(usr => usr.Id == order.UserId);
             bool fareExists = _context.FareTable.Any(fr => fr.Id == order.FareId);
             if(orderExists)
             {
