@@ -83,12 +83,17 @@ namespace BusPass.Models
         {
             return _context.Users.ToList();
         }
-
         //Find User by Id
-        public IdentityUser FindUserId(string id)
+        public string FindUserId(string username)
         {
-            var userId = _context.Users.Where(u => u.Id == id).FirstOrDefault();
-            return userId;
+            var user = FindUser(username);
+            return user.Id;
+        }
+        //Find User by Username
+        public IdentityUser FindUser(string name)
+        {
+            var usersName = _context.Users.Where(u => u.UserName == name).FirstOrDefault();
+            return usersName;
         }
 
         //Order Methods
@@ -97,11 +102,6 @@ namespace BusPass.Models
         {
             var order = _context.OrderTable.Where(o => o.Id == id).FirstOrDefault();
             return order;
-        }
-        public void AddOrder(OrderModel order)
-        {
-            _context.OrderTable.Add(order);
-            _context.SaveChanges();
         }
         //New Order to db
         public void NewOrder(OrderModel order)
@@ -121,7 +121,7 @@ namespace BusPass.Models
             {
                 throw new IncorrectFareException("Invalid Fare");
             }
-            AddOrder(order);
+            _context.OrderTable.Add(order);
             _context.SaveChanges();
         }
         //Remove order

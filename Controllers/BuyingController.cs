@@ -36,13 +36,16 @@ namespace BusPass.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Order([Bind("Id,UserId,FareId,PurchaseDate")]OrderModel order)
         {
-            IdentityUser orderUser = new IdentityUser();
+            //TODO: Find out how to get username and user id from logged in user
+            IdentityUser identityUser = new IdentityUser();
             if (ModelState.IsValid)
             {
                 try
                 {
-                    order.UserId = orderUser.Id;
-                    order.User = repository.FindUserId(order.UserId);
+                    var username = repository.FindUser(identityUser.UserName);
+                    order.User = username;
+                    var usersId = repository.FindUserId(order.User.Id);
+                    order.UserId = usersId;
                     repository.NewOrder(order);
                     return RedirectToAction(nameof(Receipt));
                 }
