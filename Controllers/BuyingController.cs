@@ -38,7 +38,7 @@ namespace BusPass.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Order([Bind("Id,UserId,FareId,PurchaseDate")]OrderModel order)
         {
-            //TODO: Find out how to get username and user id from logged in user
+            //TODO: Fare name isn't being saved
             if (ModelState.IsValid)
             {
                 try
