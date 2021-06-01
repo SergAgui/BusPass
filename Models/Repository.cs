@@ -83,18 +83,6 @@ namespace BusPass.Models
         {
             return _context.Users.ToList();
         }
-        //Find User by Id
-        public string FindUserId(string username)
-        {
-            var user = FindUser(username);
-            return user.Id;
-        }
-        //Find User by Username
-        public IdentityUser FindUser(string name)
-        {
-            var usersName = _context.Users.Where(u => u.UserName == name).FirstOrDefault();
-            return usersName;
-        }
 
         //Order Methods
         //Find Order by Id

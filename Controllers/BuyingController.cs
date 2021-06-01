@@ -14,9 +14,11 @@ namespace BusPass.Controllers
     public class BuyingController : Controller
     {
         private readonly IRepository repository;
-        public BuyingController(IRepository repo)
+        private UserManager<IdentityUser> userManager;
+        public BuyingController(IRepository repo, UserManager<IdentityUser> manager)
         {
             repository = repo;
+            userManager = manager;
         }
 
         // GET: Buying
@@ -34,18 +36,17 @@ namespace BusPass.Controllers
         // POST: Bying/Checkout
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Order([Bind("Id,UserId,FareId,PurchaseDate")]OrderModel order)
+        public async Task<ActionResult> Order([Bind("Id,UserId,FareId,PurchaseDate")]OrderModel order)
         {
             //TODO: Find out how to get username and user id from logged in user
-            IdentityUser identityUser = new IdentityUser();
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var username = repository.FindUser(identityUser.UserName);
-                    order.User = username;
-                    var usersId = repository.FindUserId(order.User.Id);
-                    order.UserId = usersId;
+
+                    order.UserId = userManager.GetUserId(User);
+                    order.User = await userManager.GetUserAsync(User);
+                    order.Fare = repository.FindFareId(order.FareId);
                     repository.NewOrder(order);
                     return RedirectToAction(nameof(Receipt));
                 }
