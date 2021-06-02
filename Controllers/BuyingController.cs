@@ -38,7 +38,6 @@ namespace BusPass.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Order([Bind("Id,UserId,FareId,PurchaseDate")]OrderModel order)
         {
-            //TODO: Fare name isn't being saved
             if (ModelState.IsValid)
             {
                 try
@@ -67,16 +66,16 @@ namespace BusPass.Controllers
             return View(currentOrder);
         }
 
-        //GET: Buying/PastOrders
+        //GET: Buying/Receipt/5
+        public ActionResult Receipt(int id)
+        {
+            return View(repository.FindOrderId(id));
+        }
+
+        //GET: Buying/PastOrders/5
         public ActionResult PastOrders()
         {
             return View(repository.OrderList());
-        }
-
-        //GET: Buying/Receipt/5
-        public ActionResult PastOrders(int id)
-        {
-            return View(repository.FindOrderId(id));
         }
 
         // POST: Buying/Refund/5

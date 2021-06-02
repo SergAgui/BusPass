@@ -1,7 +1,38 @@
-﻿@{
+﻿@model IEnumerable<OrderModel>
+@{
     ViewData["Title"] = "Previous Orders";
 }
-
 <body>
-    <div>View past orders here!</div>
+    <h1>Past Orders</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col">Fare</div>
+            <div class="col">Date</div>
+            <div class="col">Amount Paid</div>
+            <div class="col">Receipt</div>
+        </div>
+        <hr />
+        <br />
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col">
+                    @Html.DisplayFor(fromModel => item.Fare.Fare.ToString())
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(fromModel => item.PurchaseDate.Date)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(fromModel => item.Fare.Price)
+                </div>
+                <div class="col">
+                    <a asp-action="Receipt" asp-route-id="@item.Id">Edit</a>
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                    {
+                        <a asp-action="Refund" asp-route-id="@item.Id">|Refund|</a>
+                    }
+                </div>
+            </div>
+        }
+    </div>
 </body>
