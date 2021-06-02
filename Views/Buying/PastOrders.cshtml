@@ -9,30 +9,57 @@
             <div class="col">Fare</div>
             <div class="col">Date</div>
             <div class="col">Amount Paid</div>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+            {
+                <div class="col">Username</div>
+            }
             <div class="col">Receipt</div>
         </div>
         <hr />
         <br />
-        @foreach (var item in Model)
+        @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
         {
-            <div class="row">
-                <div class="col">
-                    @Html.DisplayFor(fromModel => item.Fare.Fare.ToString())
+            @foreach (var item in Model)
+            {
+                <div class="row">
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => item.Fare.Fare.ToString())
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => item.PurchaseDate.Date)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => item.Fare.Price)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => item.User.UserName)
+                    </div>
+                    <div class="col">
+                        <a asp-action="Receipt" asp-route-id="@item.Id">Receipt</a> | 
+                        <a asp-action="Refund" asp-route-id="@item.Id">Refund</a>
+                    </div>
                 </div>
-                <div class="col">
-                    @Html.DisplayFor(fromModel => item.PurchaseDate.Date)
+            }
+        }
+        else
+        {
+            @foreach (var item in Model.Where(om => om.User.UserName == User.Identity.Name))
+            {
+                <div class="row">
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => item.Fare.Fare.ToString())
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => item.PurchaseDate.Date)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => item.Fare.Price)
+                    </div>
+                    <div class="col">
+                        <a asp-action="Receipt" asp-route-id="@item.Id">Receipt</a>
+                    </div>
                 </div>
-                <div class="col">
-                    @Html.DisplayFor(fromModel => item.Fare.Price)
-                </div>
-                <div class="col">
-                    <a asp-action="Receipt" asp-route-id="@item.Id">Edit</a>
-                    @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
-                    {
-                        <a asp-action="Refund" asp-route-id="@item.Id">|Refund|</a>
-                    }
-                </div>
-            </div>
+            }
         }
     </div>
 </body>

@@ -56,7 +56,7 @@ namespace BusPass.Controllers
             }
             return View(order);
         }
-
+        //TODO: Differenciate between the two receipt actions|Possibly RedirectToAction("Receipt", new {id = order.Id})
         //GET: Buying/Receipt/5
         public ActionResult Receipt()
         {
