@@ -61,7 +61,10 @@ namespace BusPass.Controllers
         //GET: Buying/Receipt/5
         public ActionResult Receipt()
         {
-            return View(repository.OrderList().Last());
+            var currentOrder = repository.OrderList().Last();
+            var fareName = repository.FindFareId(currentOrder.FareId);
+            ViewData["FareName"] = fareName.Fare;
+            return View(currentOrder);
         }
 
         //GET: Buying/PastOrders

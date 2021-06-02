@@ -6,11 +6,20 @@
 <body>
     <h1>Receipt</h1>
     <div class="container">
-        <div class="row">@Model.Id</div>
-        <div class="row">Fare for @User.Identity.Name</div>
-        <div class="row">@Model.FareId</div>
-        <div class="row">@Model.PurchaseDate.Date</div>
-        <div class="row">QR Code here</div>
+        <div class="col">
+            <div class="row">
+                <div class="col">Confirmation Number:</div>
+                <div class="col">@Model.Id</div>
+            </div>
+            <div class="row">
+                <div class="col">@Html.ViewData["FareName"].ToString() for</div>
+                <div class="col">@User.Identity.Name</div>
+            </div>
+            <div class="row">
+                <div class="col">Date Valid</div>
+                <div class="col">@Model.PurchaseDate.Date</div>
+            </div>
+        </div>
     </div>
     <br />
     <br />
