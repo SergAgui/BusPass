@@ -47,7 +47,7 @@ namespace BusPass.Controllers
                     order.User = await userManager.GetUserAsync(User);
                     order.Fare = repository.FindFareId(order.FareId);
                     repository.NewOrder(order);
-                    return RedirectToAction(nameof(Receipt));
+                    return RedirectToAction("Receipt", new {id = order.Id});
                 }
                 catch
                 {
@@ -55,15 +55,6 @@ namespace BusPass.Controllers
                 }
             }
             return View(order);
-        }
-        //TODO: Differenciate between the two receipt actions|Possibly RedirectToAction("Receipt", new {id = order.Id})
-        //GET: Buying/Receipt/5
-        public ActionResult Receipt()
-        {
-            var currentOrder = repository.OrderList().Last();
-            var fareName = repository.FindFareId(currentOrder.FareId);
-            ViewData["FareName"] = fareName.Fare;
-            return View(currentOrder);
         }
 
         //GET: Buying/Receipt/5
@@ -75,6 +66,8 @@ namespace BusPass.Controllers
         //GET: Buying/PastOrders/5
         public ActionResult PastOrders()
         {
+            string usersId = userManager.GetUserId(User);
+            ViewData["UsersId"] = usersId;
             return View(repository.OrderList());
         }
 
