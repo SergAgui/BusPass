@@ -1,8 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using BusPass.Models
 @model IEnumerable<OrderModel>
 @inject UserManager<IdentityUser> userManager
-@inject Repository repo //TODO: can't inject repository, but may be the answer
+@inject BusPass.Models.IRepository repo
 @{
     ViewData["Title"] = "Previous Orders";
 }
@@ -21,50 +20,32 @@
         </div>
         <hr />
         <br />
-        @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
+        @foreach (var item in Model)
         {
-            @foreach (var item in Model)
-            {
-                <div class="row">
-                    <div class="col">
-                        @Html.DisplayFor(fareName => repo.FindFareId(item.FareId).Fare)
-                    </div>
-                    <div class="col">
-                        @Html.DisplayFor(fromModel => item.PurchaseDate.Date)
-                    </div>
-                    <div class="col"> //TODO: Price doesn't show
-                        @Html.DisplayFor(farePrice => repo.FindFareId(item.FareId).Price)
-                    </div>
-                    <div class="col"> //TODO: Username for each order doesn't show
-                        @Html.DisplayFor(userName => userManager.GetUserNameAsync(userManager.FindByIdAsync(item.UserId).Result))
-                    </div>
-                    <div class="col">
-                        <a asp-action="Receipt" asp-route-id="@item.Id">Receipt</a> | 
-                        <a asp-action="Refund" asp-route-id="@item.Id">Refund</a>
-                    </div>
+            <div class="row">
+                <div class="col">
+                    @Html.DisplayFor(fareName => repo.FindFareId(item.FareId).Fare)
                 </div>
-            }
-        }
-        else
-        {
-            //TODO: Fare names don't show
-            @foreach (var item in Model.Where(om => om.User.Id == userManager.GetUserId(User)))
-            {
-                <div class="row">
-                    <div class="col">
-                        @Html.DisplayFor(fareName => repo.FindFareId(item.FareId).Fare)
-                    </div>
-                    <div class="col">
-                        @Html.DisplayFor(fromModel => item.PurchaseDate.Date)
-                    </div>
-                    <div class="col">
-                        @Html.DisplayFor(farePrice => repo.FindFareId(item.FareId).Price)
-                    </div>
-                    <div class="col">
-                        <a asp-action="Receipt" asp-route-id="@item.Id">Receipt</a>
-                    </div>
+                <div class="col">
+                    @Html.DisplayFor(fromModel => item.PurchaseDate.Date)
                 </div>
-            }
+                <div class="col">
+                    @Html.DisplayFor(farePrice => repo.FindFareId(item.FareId).Price)
+                </div>
+                @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
+                {
+                    <div class="col"> <!-- TODO: Username for each order doesn't show -->
+                        @Html.DisplayFor(userName => repo.UsersNameGet(item.UserId))
+                    </div>
+                }
+            <div class="col">
+                <a asp-action="Receipt" asp-route-id="@item.Id">Receipt</a>
+                @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
+                {
+                    <a asp-action="Refund" asp-route-id="@item.Id"> | Refund</a>
+                }
+            </div>
+            </div>
         }
     </div>
 </body>

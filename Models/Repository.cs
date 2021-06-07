@@ -3,13 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace BusPass.Models
 {
     public class Repository : IRepository
     {
         private readonly ApplicationDbContext _context;
-        public Repository(ApplicationDbContext context) => _context = context;
+        private readonly UserManager<IdentityUser> userManager;
+        public Repository(ApplicationDbContext context, UserManager<IdentityUser> manager)
+        {
+            _context = context;
+            userManager = manager;
+        }
 
         //Fare Methods
         //Find Fare by Id
@@ -82,6 +88,13 @@ namespace BusPass.Models
         public List<IdentityUser> AllUsers()
         {
             return _context.Users.ToList();
+        }
+
+        public async Task<string> UsersNameGet(string id)
+        {
+            var us = await userManager.FindByIdAsync(id);
+            var uName = us.UserName;
+            return uName;
         }
 
         //Order Methods

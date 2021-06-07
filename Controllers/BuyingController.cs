@@ -66,9 +66,14 @@ namespace BusPass.Controllers
         //GET: Buying/PastOrders/5
         public ActionResult PastOrders()
         {
-            string usersId = userManager.GetUserId(User);
-            ViewData["UsersId"] = usersId;
-            return View(repository.OrderList());
+            if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
+            {
+                return View(repository.OrderList());
+            }
+            else
+            {
+                return View(repository.OrderList().Where(uid => uid.UserId == userManager.GetUserId(User)));
+            }
         }
 
         // POST: Buying/Refund/5
