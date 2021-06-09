@@ -43,7 +43,7 @@ namespace BusPass.Controllers
                 try
                 {
 
-                    order.UserId = userManager.GetUserId(User);
+                    order.User.Id = userManager.GetUserId(User);
                     order.User = await userManager.GetUserAsync(User);
                     order.Fare = repository.FindFareId(order.FareId);
                     repository.NewOrder(order);
@@ -72,7 +72,7 @@ namespace BusPass.Controllers
             }
             else
             {
-                return View(repository.OrderList().Where(uid => uid.UserId == userManager.GetUserId(User)));
+                return View(repository.OrderList().Where(uid => uid.User.Id == userManager.GetUserId(User)));
             }
         }
 

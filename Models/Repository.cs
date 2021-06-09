@@ -107,8 +107,8 @@ namespace BusPass.Models
         //New Order to db
         public void NewOrder(OrderModel order)
         {
-            bool orderExists = _context.OrderTable.Any(odr => odr.FareId == order.FareId && odr.UserId == order.UserId && odr.PurchaseDate == order.PurchaseDate);
-            bool userExists = _context.Users.Any(usr => usr.Id == order.UserId);
+            bool orderExists = _context.OrderTable.Any(odr => odr.FareId == order.FareId && odr.User.Id == order.User.Id && odr.PurchaseDate == order.PurchaseDate);
+            bool userExists = _context.Users.Any(usr => usr.Id == order.User.Id);
             bool fareExists = _context.FareTable.Any(fr => fr.Id == order.FareId);
             if(orderExists)
             {
