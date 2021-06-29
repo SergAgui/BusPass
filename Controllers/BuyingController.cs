@@ -42,7 +42,7 @@ namespace BusPass.Controllers
             {
                 try
                 {
-
+                    //TODO:Need new Migrations!
                     order.User.Id = userManager.GetUserId(User);
                     order.User = await userManager.GetUserAsync(User);
                     order.Fare = repository.FindFareId(order.FareId);
