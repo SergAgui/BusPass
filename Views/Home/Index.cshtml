@@ -10,27 +10,52 @@
             </div>
         </div>
     </div>
-    <div class="container bg-light">
-        <div class="row justify-content-center">
-            <div class="col">
-                <h2>Fares & Passes</h2>
-                <p>Choose an option that fits your needs - from a single ride to 31 day service pass.</p>
-                <a asp-controller="Home" asp-action="Fares" 
-                   class="btn btn-primary btn-lg">Find Fare Information</a>
+    <div class="container">
+        <div class="row justify-content-center" id="landing">
+            <div class="card indexCards">
+                <div>
+                    <img src="~/images/icons/passes.png" class="card-img-top iconImg" alt="Purchase" />
+                </div>
+                <div class="card-header">
+                    <h2>Fares & Passes</h2>
+                </div>
+                <div class="card-body">
+                    <p>Choose an option that fits your needs - from a single ride to 31 day service pass.</p>
+                </div>
+                <div class="card-footer blueButton">
+                    <a asp-controller="Home" asp-action="Fares"
+                       class="btn btn-primary btn-lg">Fare Information</a>
+                </div>
             </div>
-            <div class="col">
-                <h2>Service Alerts</h2>
-                <p>Check for detours, delays, and closures.</p>
+            <div class="card indexCards">
+                <div id="flag">
+                    <img src="~/images/icons/redFlag.png" class="card-img-top iconImg" alt="Service Alerts"/>
+                </div>
+                <div class="card-header">
+                    <h2>Service Alerts</h2>
+                </div>
+                <div class="card-body">
+                    <p>Check for detours, delays, and closures.</p>
+                </div>
+                <div class="card-footer blueButton">
                 <a asp-controller="Home" asp-action="Alerts"
                    class="btn btn-primary btn-lg">Find Service Alerts</a>
+                </div>
             </div>
-        </div>
-        <br /><br />
-        <div class="row">
-            <div class="col align-items-end align-self-end">
-                <h1>Buy your passes online now!</h1>
-                <a asp-controller="Buying" asp-action="Order"
-                   class="btn btn-primary btn-lg">Buy online</a>
+            <div class="card indexCards">
+                <div>
+                    <img src="~/images/icons/purchase.png" class="card-img-top iconImg" alt="Purchase"/>
+                </div>
+                <div class="card-header">
+                    <h2>Purchase Now</h2>
+                </div>
+                <div class="card-body">
+                    <p>Log in and purchase your metro pass online today!</p>
+                </div>
+                <div class="card-footer blueButton">
+                    <a asp-controller="Buying" asp-action="Order"
+                        class="btn btn-primary btn-lg">Buy Now</a>
+                </div>
             </div>
         </div>
     </div>
