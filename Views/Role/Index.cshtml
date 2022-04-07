@@ -9,7 +9,6 @@
     <div class="container">
         <div class="row">
             <div class="col">Role</div>
-            <div class="col">User</div>
             <div class="col"></div>
         </div>
         <hr />
@@ -23,7 +22,6 @@
             else
             {
                 <div class="row">
-                    <div class="col hide">@role.Id</div>
                     <div class="col">@role.Name</div>
                     <div class="col">
                         <a asp-action="Edit" asp-route-id="@role.Id">Edit</a> |
