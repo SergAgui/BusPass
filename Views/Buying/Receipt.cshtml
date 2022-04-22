@@ -1,6 +1,7 @@
 ﻿@model OrderModel
 @{
     ViewData["Title"] = "Receipt";
+    var fareDict = ViewData["AllFares"] as Dictionary<int, string>;
 }
 
 <body>
@@ -12,10 +13,18 @@
                 <div class="col">@Model.Id</div>
             </div>
             <div class="row">
-                <div class="col">@Model.FareId</div>
+                <div class="col">Fare:</div>
+                @if (fareDict.TryGetValue(Model.FareId, out string name))
+                {
+                    <div class="col">@name</div>
+                }
+                else
+                {
+                    <div>Error finding fare name</div>
+                }
             </div>
             <div class="row">
-                <div class="col">Date Valid</div>
+                <div class="col">Date Valid:</div>
                 <div class="col">@Model.PurchaseDate</div>
             </div>
         </div>

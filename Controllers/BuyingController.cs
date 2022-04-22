@@ -60,6 +60,12 @@ namespace BusPass.Controllers
         //GET: Buying/Receipt/5
         public ActionResult Receipt(int id)
         {
+            var fareDict = new Dictionary<int, string>();
+            foreach(var item in repository.AllFares())
+            {
+                fareDict.Add(item.Id, item.Fare);
+            }
+            ViewData["AllFares"] = fareDict;
             return View(repository.FindOrderId(id));
         }
 
