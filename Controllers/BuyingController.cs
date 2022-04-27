@@ -72,6 +72,12 @@ namespace BusPass.Controllers
         {
             if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
             {
+                var userDict = new Dictionary<string, string>();
+                foreach (var item in repository.AllUsers())
+                {
+                    userDict.Add(item.Id, item.UserName);
+                }
+                ViewData["AllUsers"] = userDict;
                 return View(repository.OrderList());
             }
             else

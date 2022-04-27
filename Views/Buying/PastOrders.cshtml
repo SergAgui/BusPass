@@ -4,6 +4,7 @@
 @inject BusPass.Models.IRepository repo
 @{
     ViewData["Title"] = "Previous Orders";
+    var userDict = ViewData["AllUsers"] as Dictionary<string, string>;
 }
 <body>
     <h1>Past Orders</h1>
@@ -34,10 +35,14 @@
                 </div>
                 @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
                 {
-                    <div class="col"> <!-- TODO: Username for each order doesn't show -->
-                        @*@repo.UsersNameGet(item.UserId).ToString()*@
-                        woops
-                    </div>
+                    @if(userDict.TryGetValue(item.UserId, out string name))
+                    {
+                        <div class="col">@name</div>
+                    }
+                    else
+                    {
+                        <div class="col">Username not found</div>
+                    }
                 }
             <div class="col">
                 <a asp-action="Receipt" asp-route-id="@item.Id">Receipt</a>
