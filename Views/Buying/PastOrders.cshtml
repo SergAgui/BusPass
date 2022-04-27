@@ -35,7 +35,8 @@
                 @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
                 {
                     <div class="col"> <!-- TODO: Username for each order doesn't show -->
-                        @Html.DisplayFor(userName => item.UserId)
+                        @*@repo.UsersNameGet(item.UserId).ToString()*@
+                        woops
                     </div>
                 }
             <div class="col">

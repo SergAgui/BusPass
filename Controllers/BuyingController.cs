@@ -1,12 +1,10 @@
-﻿using System;
+﻿using BusPass.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BusPass.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BusPass.Controllers
 {
@@ -36,7 +34,7 @@ namespace BusPass.Controllers
         // POST: Bying/Checkout
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Order([Bind("Id,UserId,FareId,PurchaseDate")]OrderModel order)
+        public async Task<ActionResult> Order([Bind("Id,UserId,FareId,PurchaseDate")] OrderModel order)
         {
             if (ModelState.IsValid)
             {
@@ -47,7 +45,7 @@ namespace BusPass.Controllers
                     order.User = await userManager.GetUserAsync(User);
                     order.Fare = repository.FindFareId(order.FareId);
                     repository.NewOrder(order);
-                    return RedirectToAction("Receipt", new {id = order.Id});
+                    return RedirectToAction("Receipt", new { id = order.Id });
                 }
                 catch
                 {
@@ -61,7 +59,7 @@ namespace BusPass.Controllers
         public ActionResult Receipt(int id)
         {
             var fareDict = new Dictionary<int, string>();
-            foreach(var item in repository.AllFares())
+            foreach (var item in repository.AllFares())
             {
                 fareDict.Add(item.Id, item.Fare);
             }
