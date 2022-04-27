@@ -1,4 +1,5 @@
 ﻿@model OrderModel
+@inject BusPass.Models.IRepository repo
 @{
     ViewData["Title"] = "Receipt";
     var fareDict = ViewData["AllFares"] as Dictionary<int, string>;
@@ -12,6 +13,13 @@
                 <div class="col">Confirmation Number:</div>
                 <div class="col">@Model.Id</div>
             </div>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+           {
+                <div class="row">
+                    <div class="col">Username:</div>
+                    <div class="col">@Html.DisplayFor(uName => repo.UsersNameGet(uName.UserId).Result)</div>
+                </div>
+           }
             <div class="row">
                 <div class="col">Fare:</div>
                 @if (fareDict.TryGetValue(Model.FareId, out string name))
@@ -32,4 +40,8 @@
     <br />
     <br />
     <a asp-action="PastOrders">View Past Orders</a>
+    @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
+    {
+        <a asp-action="Refund" asp-route-id="@Model.Id"> | Refund</a>
+    }
 </body>
