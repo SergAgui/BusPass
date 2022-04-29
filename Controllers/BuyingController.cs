@@ -90,7 +90,13 @@ namespace BusPass.Controllers
         public ActionResult Refund(int id)
         {
             repository.RemoveOrder(id);
-            return RedirectToAction(nameof(Refund));
+            return RedirectToAction(nameof(RefundConfirm));
+        }
+
+        //GET: Buying/Refund
+        public ActionResult RefundConfirm()
+        {
+            return View();
         }
     }
 }
