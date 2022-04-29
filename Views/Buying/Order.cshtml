@@ -13,7 +13,7 @@
             <span asp-validation-for="UserId" class="alert-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="FareId">Available Fares: </label>
+            <label asp-for="FareId">Available Fares: <span style="color: red"> required*</span></label>
             <select asp-for="FareId" class="form-control">
                 @foreach (FareModel fare in ViewData["NewFare"] as List<FareModel>)
                 {
@@ -23,7 +23,7 @@
             <span asp-validation-for="FareId" class="alert-danger"></span>
         </div>
         <div class="form-group">
-            <label>Purchase Date</label>
+            <label>Purchase Date <span style="color: red"> required*</span></label>
             <input asp-for="PurchaseDate" class="form-control" required />
             <span asp-validation-for="PurchaseDate" class="alert-danger"></span>
         </div>
