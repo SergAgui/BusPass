@@ -24,8 +24,7 @@
         </div>
         <div class="form-group">
             <label>Purchase Date</label>
-            <input asp-for="PurchaseDate" type="datetime" class="form-control" 
-                placeholder="@DateTime.Today.ToShortDateString()" value="@DateTime.Today.ToShortDateString()" />
+            <input asp-for="PurchaseDate" class="form-control" required />
             <span asp-validation-for="PurchaseDate" class="alert-danger"></span>
         </div>
         <br />
