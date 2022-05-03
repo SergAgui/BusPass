@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<IdentityRole>
+
 @{
     ViewData["Title"] = "List of Roles";
 }
@@ -7,8 +8,7 @@
     <h1>Current Roles</h1>
     <div class="container">
         <div class="row">
-            <div class="col">Role</div>
-            <div class="col">User</div>
+            <div class="col">Role Name</div>
             <div class="col"></div>
         </div>
         <hr />
@@ -22,7 +22,6 @@
             else
             {
                 <div class="row">
-                    <div class="col hide">@role.Id</div>
                     <div class="col">@role.Name</div>
                     <div class="col">
                         <a asp-action="Edit" asp-route-id="@role.Id">Edit</a> |
@@ -36,5 +35,6 @@
             <br />
             <a asp-action="Create" class="btn btn-primary">Add New Role</a>
         }
+        <a class="backToProfile" asp-area="Identity" asp-page="/Account/Manage/Index">Back to Profile</a>
     </div>
 </body>

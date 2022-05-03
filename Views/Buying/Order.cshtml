@@ -4,6 +4,7 @@
 }
 
 <body>
+    <h1>Place A New Order</h1>
     @using (Html.BeginForm("Order", "Buying", FormMethod.Post))
     {
         <div asp-validation-summary="ModelOnly" class="alert-danger"></div>
@@ -13,7 +14,7 @@
             <span asp-validation-for="User.Id" class="alert-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="FareId">Available Fares: </label>
+            <label asp-for="FareId">Available Fares: <span style="color: red"> required*</span></label>
             <select asp-for="FareId" class="form-control">
                 @foreach (FareModel fare in ViewData["NewFare"] as List<FareModel>)
                 {
@@ -23,26 +24,18 @@
             <span asp-validation-for="FareId" class="alert-danger"></span>
         </div>
         <div class="form-group">
-            <label>Purchase Date</label>
-            <input asp-for="PurchaseDate" class="form-control" />
+            <label>Purchase Date <span style="color: red"> required*</span></label>
+            <input asp-for="PurchaseDate" class="form-control" required />
             <span asp-validation-for="PurchaseDate" class="alert-danger"></span>
         </div>
         <br />
         <br />
         <div class="form-group">
-            <input type="submit" value="Checkout" class="btn btn-primary btn-lg" />
+            <input type="submit" value="Checkout" id="checkout" 
+                class="btn btn-primary btn-lg" onclick="orderExists()" />
         </div>
     }
     <div>
         <a asp-action="PastOrders">View Past Orders</a>
     </div>
 </body>
-
-
-<!--Plan: Display types of passes. Use rotary selectors and descriptions change dynamically-->
-<!--
-Option to add funds to account with field
-Confirm Order button
-    Pop up confirmation of order
-    If no payment info is stored, then ask for payment
--->

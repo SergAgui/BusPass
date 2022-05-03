@@ -6,10 +6,26 @@
     <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
+
+    @* Remove commented when setting up External Logins
     @if (hasExternalLogins)
     {
         <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
-    }
+    }*@
+
     <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
+</ul>
+    @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+    {
+        <hr />
+        <ul class="nav nav-pills flex-column">
+            <li><h5>Administrator Tools</h5></li>
+            <li class="nav-item"><a class="nav-link" id="add-role" asp-controller="Role" asp-action="Index">Add User To Role</a></li>
+            <li class="nav-item"><a class="nav-link" id="add-fare" asp-controller="Fare" asp-action="Index">Create/Update Fare</a></li>
+            <li class="nav-item"><a class="nav-link" id="add-alert" asp-controller="ServiceAlert" asp-action="Index">New Alert</a></li>
+        </ul>
+    }
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item"><a class="nav-link" id="past-orders" asp-controller="Buying" asp-action="PastOrders">View Past Orders</a></li>
 </ul>

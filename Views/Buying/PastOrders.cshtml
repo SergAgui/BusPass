@@ -4,6 +4,7 @@
 @inject BusPass.Models.IRepository repo
 @{
     ViewData["Title"] = "Previous Orders";
+    var userDict = ViewData["AllUsers"] as Dictionary<string, string>;
 }
 <body>
     <h1>Past Orders</h1>
@@ -34,18 +35,33 @@
                 </div>
                 @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
                 {
+<<<<<<< HEAD
                     <div class="col"> <!-- TODO: Username for each order doesn't show -->
                         @Html.DisplayFor(userName => item.User.Id)
                     </div>
+=======
+                    @if(userDict.TryGetValue(item.UserId, out string name))
+                    {
+                        <div class="col">@name</div>
+                    }
+                    else
+                    {
+                        <div class="col">Username not found</div>
+                    }
+>>>>>>> 9b7751abade2a80922fbf1c9ea016bf361c6c47e
                 }
-            <div class="col">
-                <a asp-action="Receipt" asp-route-id="@item.Id">Receipt</a>
-                @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
-                {
-                    <a asp-action="Refund" asp-route-id="@item.Id"> | Refund</a>
-                }
-            </div>
+                <div class="col">
+                    <a asp-action="Receipt" asp-route-id="@item.Id">Receipt</a>
+                    @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
+                    {
+                        <a asp-action="Refund" asp-route-id="@item.Id"> | Refund</a>
+                    }
+                </div>
             </div>
         }
     </div>
+    <br />
+        <div>
+            <a class="btn btn-primary btn-lg" asp-action="Order">Place Another Order</a>
+        </div>
 </body>

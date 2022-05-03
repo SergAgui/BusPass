@@ -1,6 +1,8 @@
 ﻿@model OrderModel
+@inject BusPass.Models.IRepository repo
 @{
     ViewData["Title"] = "Receipt";
+    var fareDict = ViewData["AllFares"] as Dictionary<int, string>;
 }
 
 <body>
@@ -11,17 +13,36 @@
                 <div class="col">Confirmation Number:</div>
                 <div class="col">@Model.Id</div>
             </div>
-            <div class="row"> //TODO: Fare name doesn't show when coming from PastOrders
-                <div class="col">@Model.Fare.Fare for</div>
-                <div class="col">@User.Identity.Name</div>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+           {
+                <div class="row">
+                    <div class="col">Username:</div>
+                    <div class="col">@Html.DisplayFor(uName => repo.UsersNameGet(uName.UserId).Result)</div>
+                </div>
+           }
+            <div class="row">
+                <div class="col">Fare:</div>
+                @if (fareDict.TryGetValue(Model.FareId, out string name))
+                {
+                    <div class="col">@name</div>
+                }
+                else
+                {
+                    <div>Error finding fare name</div>
+                }
             </div>
             <div class="row">
-                <div class="col">Date Valid</div>
-                <div class="col">@Model.PurchaseDate</div>
+                <div class="col">Purchase Date:</div>
+                <div class="col">@Model.PurchaseDate.ToShortDateString()</div>
             </div>
         </div>
     </div>
     <br />
     <br />
-    <a asp-action="PastOrders">View Past Orders</a>
+    <a asp-action="PastOrders">View Past Orders</a> |
+    @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
+    {
+        <a asp-action="Refund" asp-route-id="@Model.Id"> Refund </a>
+    }
+    | <a asp-action="Order"> Place Another Order</a>
 </body>

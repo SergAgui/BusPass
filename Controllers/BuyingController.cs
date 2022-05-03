@@ -1,12 +1,10 @@
-﻿using System;
+﻿using BusPass.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BusPass.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BusPass.Controllers
 {
@@ -36,7 +34,7 @@ namespace BusPass.Controllers
         // POST: Bying/Checkout
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Order([Bind("Id,UserId,FareId,PurchaseDate")]OrderModel order)
+        public async Task<ActionResult> Order([Bind("Id,UserId,FareId,PurchaseDate")] OrderModel order)
         {
             if (ModelState.IsValid)
             {
@@ -47,7 +45,7 @@ namespace BusPass.Controllers
                     order.User = await userManager.GetUserAsync(User);
                     order.Fare = repository.FindFareId(order.FareId);
                     repository.NewOrder(order);
-                    return RedirectToAction("Receipt", new {id = order.Id});
+                    return RedirectToAction("Receipt", new { id = order.Id });
                 }
                 catch
                 {
@@ -60,6 +58,12 @@ namespace BusPass.Controllers
         //GET: Buying/Receipt/5
         public ActionResult Receipt(int id)
         {
+            var fareDict = new Dictionary<int, string>();
+            foreach (var item in repository.AllFares())
+            {
+                fareDict.Add(item.Id, item.Fare);
+            }
+            ViewData["AllFares"] = fareDict;
             return View(repository.FindOrderId(id));
         }
 
@@ -68,6 +72,12 @@ namespace BusPass.Controllers
         {
             if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
             {
+                var userDict = new Dictionary<string, string>();
+                foreach (var item in repository.AllUsers())
+                {
+                    userDict.Add(item.Id, item.UserName);
+                }
+                ViewData["AllUsers"] = userDict;
                 return View(repository.OrderList());
             }
             else
@@ -80,7 +90,13 @@ namespace BusPass.Controllers
         public ActionResult Refund(int id)
         {
             repository.RemoveOrder(id);
-            return RedirectToAction(nameof(Refund));
+            return RedirectToAction(nameof(RefundConfirm));
+        }
+
+        //GET: Buying/Refund
+        public ActionResult RefundConfirm()
+        {
+            return View();
         }
     }
 }
