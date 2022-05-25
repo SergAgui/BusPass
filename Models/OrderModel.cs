@@ -12,7 +12,7 @@ namespace BusPass.Models
     public class OrderModel
     {
         public int Id {get; set;}
-        //public string UserId {get; set;}
+        public string UserId {get; set;}
         public virtual IdentityUser User {get; set;}
         [Required]
         public int FareId{get; set;}
