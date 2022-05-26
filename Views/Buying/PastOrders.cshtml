@@ -36,7 +36,7 @@
                 </div>
                 @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
                 {
-                    <div class="col"> <!-- TODO: Username for each order doesn't show -->
+                    <div class="col">
                         @Html.DisplayFor(userName => item.User.Id)
                     </div>
                     @if(userDict.TryGetValue(item.UserId, out string name))

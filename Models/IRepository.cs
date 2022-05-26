@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using QRCoder;
 
 
 namespace BusPass.Models
@@ -27,5 +28,7 @@ namespace BusPass.Models
         void NewOrder(OrderModel order);
         void RemoveOrder(int id);
         List<OrderModel> OrderList();
+
+        QRCode QRCode();
     }
 }
