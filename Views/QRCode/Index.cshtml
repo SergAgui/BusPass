@@ -1,0 +1,53 @@
+﻿@model IEnumerable<QRCModel>
+@{
+    ViewData["Title"] = "List of QR Codes";
+}
+<body>
+    <h1>QR Codes In Use</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col">QR Code</div>
+            <div class="col">Valid</div>
+            <div class="col">View Receipt</div>
+        </div>
+        <hr />
+        @*@foreach (var serviceAlert in Model)
+        {
+            @if (serviceAlert.AlertType == ServiceAlertModel.Type.Current)
+            {
+                <div class="row">
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => serviceAlert.Message)
+                    </div>
+                    <div class=" col">
+                        @Html.DisplayFor(fromModel => serviceAlert.AlertType)
+                    </div>
+                    <div class="col">
+                        <a asp-action="Delete" asp-route-id="@serviceAlert.Id">Delete</a>
+                    </div>
+                </div>
+            }
+        }
+        <br />
+        @foreach (var serviceAlert in Model)
+        {
+            @if (serviceAlert.AlertType == ServiceAlertModel.Type.Event)
+            {
+                <div class="row">
+                    <div class="col">
+                        @Html.DisplayFor(fromModel => serviceAlert.Message)
+                    </div>
+                    <div class=" col">
+                        @Html.DisplayFor(fromModel => serviceAlert.AlertType)
+                    </div>
+                    <div class="col">
+                        <a asp-action="Delete" asp-route-id="@serviceAlert.Id">Delete</a>
+                    </div>
+                </div>
+            }
+        }*@
+        <br />
+        <a class="btn btn-primary" asp-action="Add">Add New Alert</a>
+        <a class="backToProfile" asp-area="Identity" asp-page="/Account/Manage/Index">Back to Profile</a>
+    </div>
+</body>

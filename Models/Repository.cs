@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using QRCoder;
 
 namespace BusPass.Models
 {
@@ -11,6 +12,7 @@ namespace BusPass.Models
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> userManager;
+
         public Repository(ApplicationDbContext context, UserManager<IdentityUser> manager)
         {
             _context = context;
@@ -131,6 +133,12 @@ namespace BusPass.Models
         public List<OrderModel> OrderList()
         {
             return _context.OrderTable.ToList();
+        }
+
+        //QRCode Methods
+        public void AddQR()
+        {
+
         }
 
         //Exceptions

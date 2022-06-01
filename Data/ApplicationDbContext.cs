@@ -16,5 +16,6 @@ namespace BusPass.Data
         public DbSet<FareModel> FareTable {get; set;}
         public DbSet<OrderModel> OrderTable {get; set;}
         public DbSet<ServiceAlertModel> ServiceAlertsTable {get; set;}
+        public DbSet<BusPass.Models.QRCModel> QRCModel { get; set; }
     }
 }
