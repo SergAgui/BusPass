@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Drawing;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QRCoder;
-using System.Drawing;
 
 namespace BusPass.Controllers
 {
@@ -12,11 +15,28 @@ namespace BusPass.Controllers
         // GET: QRCodeController
         public ActionResult Index()
         {
-            QRCodeData codeData = codeGenerator.CreateQrCode("Some text to fill", QRCodeGenerator.ECCLevel.Q);
+            return View();
+        }
+
+        private static Byte[] BitmapToBytes(Bitmap img)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                return ms.ToArray();
+            }
+        }
+
+        // POST: QRCodeController
+        [HttpPost]
+        public IActionResult Index(string qrText)
+        {
+            QRCodeData codeData = codeGenerator.CreateQrCode(qrText, QRCodeGenerator.ECCLevel.Q);
+            string fileGuid = Guid.NewGuid().ToString().Substring(0,4);
+            codeData.SaveRawData("wwwroot/qrr/order-" + fileGuid + ".qrr", QRCodeData.Compression.Uncompressed);
             QRCode qrCode = new QRCode(codeData);
             Bitmap qrImage = qrCode.GetGraphic(20);
-            
-            return View();
+            return View(BitmapToBytes(qrImage));
         }
 
         // GET: QRCodeController/Add
