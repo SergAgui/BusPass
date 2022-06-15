@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -27,5 +28,8 @@ namespace BusPass.Models
         void NewOrder(OrderModel order);
         void RemoveOrder(int id);
         List<OrderModel> OrderList();
+
+        Byte[] BitmapToBytes(Bitmap img);
+        Byte[] NewQRCode(string date);
     }
 }

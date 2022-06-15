@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Drawing;
+using System.IO;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using QRCoder;
@@ -12,6 +14,7 @@ namespace BusPass.Models
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> userManager;
+        QRCodeGenerator qrCodeGenerator = new QRCodeGenerator();
 
         public Repository(ApplicationDbContext context, UserManager<IdentityUser> manager)
         {
@@ -136,9 +139,24 @@ namespace BusPass.Models
         }
 
         //QRCode Methods
-        public void AddQR()
+        //Bitmap to Bytes
+        private static Byte[] BitmapToBytes(Bitmap img)
         {
-
+            using (MemoryStream ms = new MemoryStream())
+            {
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                return ms.ToArray();
+            }
+        }
+        //New QR Code
+        public Byte[] NewQRCode(string date)
+        {
+            QRCodeData codeData = qrCodeGenerator.CreateQrCode(date, QRCodeGenerator.ECCLevel.Q);
+            string fileGuid = Guid.NewGuid().ToString().Substring(0, 4);
+            codeData.SaveRawData("wwwroot/qrr/order-" + fileGuid + ".qrr", QRCodeData.Compression.Uncompressed);
+            QRCode qrCode = new QRCode(codeData);
+            Bitmap qrImage = qrCode.GetGraphic(20);
+            return BitmapToBytes(qrImage);
         }
 
         //Exceptions
